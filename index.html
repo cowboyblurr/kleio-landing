@@ -1,162 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KLEIO | The Archive is Forming</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLEIO | The Archive is Forming</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vault-bg: #FFFFFF; 
+            --obsidian: #1A1A1A;
+        }
 
-<style>
-:root {
-    --vault-bg: #FFFFFF; 
-    --obsidian: #1A1A1A;
-}
+        body, html {
+            margin: 0; padding: 0;
+            background: var(--vault-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
 
-body {
-    margin:0;
-    background:var(--vault-bg);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    font-family:'Inter', sans-serif;
-}
+        .hero {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* HERO */
-.hero {
-    position:relative;
-    width:700px;
-}
+        video {
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+        }
 
-video {
-    width:100%;
-    pointer-events:none;
-}
+        /* LOGO & NODE WRAPPER */
+        .wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Allows clicks to pass through to the logo */
+        }
 
-/* LOGO WRAPPER */
-.wrapper {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-}
+        .logo {
+            width: 300px;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto; /* Re-enables clicking on the logo */
+            transition: transform 0.4s ease;
+        }
+        .logo:hover { transform: scale(1.02); }
 
-/* LOGO */
-.logo {
-    width:300px;
-    cursor:pointer;
-    position:relative;
-    z-index:10;
-}
+        /* INTERACTIVE NODES */
+        .node {
+            position: absolute;
+            top: 50%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 20;
+            pointer-events: none;
+        }
 
-/* NODES */
-.node {
-    position:absolute;
-    top:50%;
-    opacity:0;
-    visibility:hidden;
-    transition:.5s;
-    z-index:20;
-}
+        .node a {
+            pointer-events: auto; /* Crucial: Enables clicking the link inside the node */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: black;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
 
-/* IMPORTANT FIX */
-.node a {
-    pointer-events:auto;
-}
+        .node img { width: 38px; height: auto; }
 
-/* prevent parent blocking */
-.wrapper {
-    pointer-events:none;
-}
-.logo {
-    pointer-events:auto;
-}
-.node {
-    pointer-events:none;
-}
-.node a {
-    pointer-events:auto;
-}
+        /* Toggle Positions */
+        .wrapper.active .left {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-220px, -50%);
+        }
+        .wrapper.active .right {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(220px, -50%);
+        }
 
-/* positions */
-.wrapper.active .left {
-    opacity:1;
-    visibility:visible;
-    transform:translate(-200px,-50%);
-}
-.wrapper.active .right {
-    opacity:1;
-    visibility:visible;
-    transform:translate(200px,-50%);
-}
-
-.menu {
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-    font-size:.8rem;
-    letter-spacing:.1em;
-    color:black;
-    text-decoration:none;
-}
-
-.menu img {
-    width:38px;
-}
-</style>
+        @media (max-width: 600px) {
+            .logo { width: 220px; }
+            .wrapper.active .left { transform: translate(-130px, -50%); }
+            .wrapper.active .right { transform: translate(130px, -50%); }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="hero">
+    <div class="hero">
+        <video autoplay loop muted playsinline>
+            <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4" type="video/mp4">
+        </video>
 
-<video autoplay loop muted playsinline>
-<source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4">
-</video>
+        <div class="wrapper" id="wrap">
+            <div class="node left">
+                <a href="./identity-manifest.html">
+                    <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true">
+                    <span>Learn More</span>
+                </a>
+            </div>
 
-<div class="wrapper" id="wrap">
+            <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true" class="logo" id="logo">
 
-<!-- LEFT -->
-<div class="node left">
-<a href="./identity-manifest.html" class="menu">
-<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true">
-<span>Learn More</span>
-</a>
-</div>
+            <div class="node right">
+                <a href="https://x.com/kleio_eco" target="_blank">
+                    <span>Social Media</span>
+                    <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true">
+                </a>
+            </div>
+        </div>
+    </div>
 
-<!-- LOGO -->
-<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true"
-class="logo"
-id="logo">
+    <script>
+        const logo = document.getElementById('logo');
+        const wrap = document.getElementById('wrap');
 
-<!-- RIGHT -->
-<div class="node right">
-<a href="https://x.com/kleio_eco" target="_blank" class="menu">
-<span>Social Media</span>
-<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true">
-</a>
-</div>
+        logo.onclick = (e) => {
+            wrap.classList.toggle('active');
+            e.stopPropagation();
+        };
 
-</div>
-</div>
-
-<script>
-const logo = document.getElementById('logo');
-const wrap = document.getElementById('wrap');
-
-logo.onclick = (e)=>{
-    wrap.classList.toggle('active');
-    e.stopPropagation();
-};
-
-document.onclick = (e)=>{
-    if(!wrap.contains(e.target)){
-        wrap.classList.remove('active');
-    }
-};
-</script>
-
+        document.onclick = (e) => {
+            if (!wrap.contains(e.target)) {
+                wrap.classList.remove('active');
+            }
+        };
+    </script>
 </body>
 </html>
