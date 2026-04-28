@@ -50,7 +50,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 1rem;
-            min-height: 400px; /* Ensures space even before video loads */
+            min-height: 400px;
         }
 
         .hero-video {
@@ -82,7 +82,6 @@
 
         .kleio-logo:hover { transform: scale(1.03); }
 
-        /* FLOATING WING NODES */
         .wing-node {
             position: absolute;
             top: 50%;
@@ -126,7 +125,6 @@
             transition: transform 0.4s ease;
         }
 
-        /* DESCRIPTION & FORM */
         p.description {
             font-size: 1rem;
             font-weight: 300;
@@ -178,6 +176,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -187,8 +186,10 @@
             </video>
             
             <div class="logo-wrapper" id="logo-wrapper">
+
+                <!-- ✅ FIXED LEARN MORE -->
                 <div class="wing-node left">
-                    <a href="./identity-manifest.html" class="menu-item"> 
+                    <a href="/kleio-landing/identity-manifest.html" class="menu-item" onclick="event.stopPropagation();"> 
                         <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
                         <span>Learn More</span>
                     </a>
@@ -205,7 +206,9 @@
             </div>
         </div>
         
-        <p class="description">A dedicated infrastructure for physical, human-authored art. Kleio provides creators with a frictionless economic engine and collectors with an uncompromising presentation layer.</p>
+        <p class="description">
+            A dedicated infrastructure for physical, human-authored art. Kleio provides creators with a frictionless economic engine and collectors with an uncompromising presentation layer.
+        </p>
 
         <form class="waitlist-form" action="https://formspree.io/f/mnjlylod" method="POST">
             <input type="email" name="email" placeholder="Enter your email" required>
@@ -228,5 +231,6 @@
             }
         });
     </script>
+
 </body>
 </html>
