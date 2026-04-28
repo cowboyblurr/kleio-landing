@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>KLEIO WEBPAGE</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+    <filter id="liquid-lens">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="1" result="warp">
+            <animate attributeName="baseFrequency" values="0.015 0.02; 0.025 0.03; 0.015 0.02" dur="6s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+</svg>
+
+<div class="container">
+    
+    <div class="video-wrapper">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="logo-wrapper" id="logo-wrapper">
+        
+        <div class="wing-node left">
+            <a href="learn-more.html" class="menu-item">
+                <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
+                <span>Learn More</span>
+            </a>
+        </div>
+
+        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true" alt="Kleio Logo" class="kleio-logo" id="logo-trigger">
+        
+        <div class="wing-node right">
+            <a href="#" target="_blank" class="menu-item">
+                <span>Social Media</span>
+                <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
+            </a>
+        </div>
+
+    </div>
+    
+    <p class="description">A dedicated infrastructure for physical, human-authored art. Kleio provides sovereign creators with a frictionless economic engine, and collectors with an uncompromising presentation layer. The archive is forming.</p>
+
+    <form class="waitlist-form" action="https://formspree.io/f/mnjlylod" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Sign Up For Early Access</button>
+    </form>
+
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

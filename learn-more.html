@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLEIO Architecture</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body class="manifesto-page">
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+      <filter id="liquid-lens">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="1" result="warp">
+          <animate attributeName="baseFrequency" values="0.015 0.02; 0.025 0.03; 0.015 0.02" dur="6s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
+    <main class="container">
+      <div class="manifesto-composition">
+        <div class="finger-node" id="node-1">
+          <img src="https://raw.githubusercontent.com/cowboyblurr/KLEIO-ASSETS/main/finger1.png" alt="Finger node 1">
+        </div>
+
+        <div class="finger-node signature-node" id="node-b" data-copy="copy-provenance" data-bg="var(--bg-a)">
+          <img src="https://raw.githubusercontent.com/cowboyblurr/KLEIO-ASSETS/main/finger%20b.png" alt="Finger node B">
+        </div>
+
+        <div class="finger-node signature-node" id="node-a" data-copy="copy-taste" data-bg="var(--bg-b)">
+          <img src="https://raw.githubusercontent.com/cowboyblurr/KLEIO-ASSETS/main/finger%20A.png" alt="Finger node A">
+        </div>
+
+        <div class="finger-node signature-node" id="node-c" data-copy="copy-bridge" data-bg="var(--bg-c)">
+          <img src="https://raw.githubusercontent.com/cowboyblurr/KLEIO-ASSETS/main/finger%20c.png" alt="Finger node C">
+        </div>
+
+        <div class="finger-node" id="node-d">
+          <img src="https://raw.githubusercontent.com/cowboyblurr/KLEIO-ASSETS/main/finger%20d.png" alt="Finger node D">
+        </div>
+
+        <img
+          id="logo-trigger-reset"
+          src="https://raw.githubusercontent.com/cowboyblurr/KLEIO-ASSETS/main/KLEIO%20TRANSPARENT.png"
+          alt="Kleio Logo"
+        >
+      </div>
+
+      <div class="manifesto-vault">
+        <p id="manifesto-copy-display">THE ARCHIVE IS FORMING.
+
+
+A permanent infrastructure for human authorship. Kleio consecrates the Lifecycle of the Masterpiece. Select a signature node above to explore our foundational protocols.</p>
+      </div>
+    </main>
+
+    <script src="./manifesto-engine.js"></script>
+  </body>
+</html>

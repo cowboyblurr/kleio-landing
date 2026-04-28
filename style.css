@@ -1,0 +1,514 @@
+/* The Museum Vault Color Palette */
+:root {
+    /* Locked to pure white to match the video background */
+    --vault-bg: #FFFFFF; 
+    --obsidian: #1A1A1A;
+    --marble-grey: #8A8A8A;
+    --bg-default: #FFFFFF;
+    --bg-a: #E6F7F2;
+    --bg-b: #D8D1E6;
+    --bg-c: #F0F0F0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--vault-bg);
+    color: var(--obsidian);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.container > * { animation: fadein 1.5s ease-in-out forwards; }
+
+/* Cinematic Video Centralization */
+.video-wrapper {
+    width: 100%;
+    max-width: 700px; /* Lower this number to 600px if you also want to shrink the video size */
+    margin-top: 3rem; /* THE NUDGE: This physically brings the video down from the top of the screen */
+    margin-bottom: -8rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* --- THE FLOATING MENU ARCHITECTURE --- */
+.logo-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kleio-logo {
+    max-width: 280px; 
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+    z-index: 5;
+    left: -5px; 
+}
+
+.kleio-logo:hover { transform: scale(1.05); }
+
+/* The Floating Interactive Nodes */
+.wing-node {
+    position: absolute;
+    top: 50%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Clean math for symmetrical floating placement */
+.logo-wrapper.active .wing-node.left {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-150px) translateY(-50%);
+    z-index: 12;
+    pointer-events: auto;
+}
+
+.logo-wrapper.active .wing-node.right {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(150px) translateY(-50%);
+    z-index: 12;
+    pointer-events: auto;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--obsidian);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transition: all 0.3s ease;
+}
+
+.wing-node.left .menu-item:hover { transform: translateX(-5px); }
+.wing-node.right .menu-item:hover { transform: translateX(5px); }
+
+/* The GIF Icons */
+.menu-icon {
+    width: 35px; /* Sized specifically for your new GIF */
+    height: auto;
+    mix-blend-mode: multiply; /* Erases any white background on the GIF itself */
+    transition: transform 0.4s ease;
+}
+
+.menu-item:hover .menu-icon { transform: scale(1.2); }
+
+/* --- DESCRIPTION & FORM --- */
+p.description {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--obsidian);
+    max-width: 550px;
+    margin: 1.4rem 0 2rem;
+    filter: url(#liquid-lens);
+}
+
+.waitlist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    width: 100%;
+}
+
+input[type="email"] {
+    width: 320px;
+    padding: 1.2rem;
+    background: transparent;
+    border: 1px solid var(--obsidian);
+    color: var(--obsidian);
+    font-size: 0.85rem;
+    outline: none;
+    transition: background 0.3s;
+}
+
+input[type="email"]:focus { background: rgba(0,0,0,0.02); }
+
+button {
+    width: 320px;
+    padding: 1.2rem;
+    background-color: var(--obsidian);
+    color: var(--vault-bg); 
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+button:hover { opacity: 0.9; }
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Tweaks */
+@media (max-width: 600px) {
+    .hero-video { max-width: 100%; }
+    .logo-wrapper.active .wing-node.left { transform: translateX(-95px) translateY(-50%); }
+    .logo-wrapper.active .wing-node.right { transform: translateX(95px) translateY(-50%); }
+    .menu-item { font-size: 0.65rem; }
+    .menu-icon { width: 28px; }
+}
+
+body.manifesto-page {
+    background-color: var(--bg-default);
+    transition: background-color 1.2s ease;
+}
+
+.manifesto-composition {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 560px;
+}
+
+#logo-trigger-reset {
+    width: min(435px, 75vw);
+    max-width: none;
+    height: auto;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#logo-trigger-reset:hover {
+    transform: scale(1.05);
+}
+
+.finger-node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: signature-pulse 3s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.finger-node img {
+    width: 500px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+}
+
+.finger-node.signature-node img {
+    cursor: pointer;
+}
+
+.finger-node.is-hovered img {
+    transform: scale(1.035);
+    filter: brightness(1.06) saturate(1.08);
+}
+
+#node-1 {
+    animation-delay: 0s;
+}
+
+#node-b {
+    animation-delay: 0.2s;
+}
+
+#node-a {
+    animation-delay: 0.4s;
+}
+
+#node-c {
+    animation-delay: 0.6s;
+}
+
+#node-d {
+    animation-delay: 0.8s;
+}
+
+.manifesto-vault {
+    margin-top: 4rem;
+}
+
+#manifesto-copy-display {
+    text-align: center;
+    max-width: 600px;
+    font-weight: 300;
+    line-height: 1.7;
+    filter: url(#liquid-lens);
+}
+
+@keyframes signature-pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+}
+
+/* --- IDENTITY MANIFEST (STATE MIRROR) --- */
+body.identity-page {
+    background-color: var(--vault-bg);
+}
+
+.back-link {
+    position: fixed;
+    top: 1.25rem;
+    left: 1.25rem;
+    text-decoration: none;
+    color: var(--obsidian);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    z-index: 50;
+}
+
+.identity-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 2rem;
+}
+
+.portrait-viewport {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.identity-portrait {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    object-fit: contain;
+    max-width: 90%;
+    max-height: 90%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    filter: url(#liquid-lens);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.state-mirror .face-mirror,
+.state-psychology .face-psychology,
+.state-gallery .face-gallery,
+.state-data .face-data {
+    opacity: 1;
+}
+
+.node-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    z-index: 10;
+}
+
+.node-icon img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+}
+
+#node-psychology {
+    transform: translate(-50%, -50%) translate(-200px, -220px) rotate(-15deg);
+}
+
+#node-gallery {
+    transform: translate(-50%, -50%) translate(180px, -180px) rotate(15deg);
+}
+
+#node-data {
+    transform: translate(-50%, -50%) translate(160px, 180px) rotate(-10deg);
+}
+
+.node-icon:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.06) saturate(1.08);
+}
+
+.node-icon.locked-node img {
+    transform: scale(1.08);
+    filter: brightness(1.12) saturate(1.12);
+}
+
+.node-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    background: #000;
+    opacity: 0.9;
+    transform-origin: 0 50%;
+}
+
+#node-psychology::after {
+    width: 240px;
+    transform: translate(0, -50%) rotate(35deg);
+}
+
+#node-gallery::after {
+    width: 220px;
+    transform: translate(0, -50%) rotate(145deg);
+}
+
+#node-data::after {
+    width: 210px;
+    transform: translate(0, -50%) rotate(-135deg);
+}
+
+.node-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--obsidian);
+    z-index: 11;
+    pointer-events: none;
+}
+
+.node-label.psychology-label {
+    transform: translate(-50%, -50%) translate(-305px, -235px);
+}
+
+.node-label.gallery-label {
+    transform: translate(-50%, -50%) translate(255px, -210px);
+}
+
+.node-label.data-label {
+    transform: translate(-50%, -50%) translate(85px, 250px);
+}
+
+.content-panel {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.identity-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.identity-logo {
+    width: 90px;
+    height: auto;
+}
+
+.identity-title {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.08em;
+    font-size: 1.4rem;
+}
+
+.state-desc {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.state-mirror .desc-mirror,
+.state-psychology .desc-psychology,
+.state-gallery .desc-gallery,
+.state-data .desc-data {
+    opacity: 1;
+}
+
+.state-desc h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.state-desc p {
+    margin: 0;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 560px;
+    filter: url(#liquid-lens);
+}
+
+@media (max-width: 900px) {
+    .identity-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .portrait-viewport {
+        min-height: 520px;
+    }
