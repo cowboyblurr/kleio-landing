@@ -20,13 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     nodes.forEach(node => {
         const state = node.dataset.state;
 
-        node.addEventListener('mouseenter', () => {
-            if (!lockedState) updateUI(state);
-        });
-
-        node.addEventListener('mouseleave', () => {
-            if (!lockedState) updateUI('mirror');
-        });
+        node.addEventListener('mouseenter', () => { if (!lockedState) updateUI(state); });
+        node.addEventListener('mouseleave', () => { if (!lockedState) updateUI('mirror'); });
         
         node.addEventListener('click', () => {
             if (lockedState === state) {
