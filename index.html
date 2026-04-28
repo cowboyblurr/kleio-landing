@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS ARCHITECTURE */
         :root {
             --vault-bg: #FFFFFF; 
             --obsidian: #1A1A1A;
@@ -18,8 +17,7 @@
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             min-height: 100vh;
             background-color: var(--vault-bg);
             color: var(--obsidian);
@@ -44,7 +42,6 @@
 
         .container > * { animation: fadein 1.5s ease-in-out forwards; }
 
-        /* THE COMPOSITE HERO FUSION */
         .hero-composition {
             position: relative;
             width: 100%;
@@ -53,6 +50,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 1rem;
+            min-height: 400px; /* Ensures space even before video loads */
         }
 
         .hero-video {
@@ -84,7 +82,7 @@
 
         .kleio-logo:hover { transform: scale(1.03); }
 
-        /* FLOATING NODES */
+        /* FLOATING WING NODES */
         .wing-node {
             position: absolute;
             top: 50%;
@@ -100,19 +98,19 @@
         .logo-wrapper.active .wing-node.left {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-180px) translateY(-50%);
+            transform: translateX(-190px) translateY(-50%);
         }
 
         .logo-wrapper.active .wing-node.right {
             opacity: 1;
             visibility: visible;
-            transform: translateX(180px) translateY(-50%);
+            transform: translateX(190px) translateY(-50%);
         }
 
         .menu-item {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.8rem;
             text-decoration: none;
             color: var(--obsidian);
             font-size: 0.8rem;
@@ -121,11 +119,8 @@
             transition: all 0.3s ease;
         }
 
-        .wing-node.left .menu-item:hover { transform: translateX(-5px); }
-        .wing-node.right .menu-item:hover { transform: translateX(5px); }
-
         .menu-icon {
-            width: 35px;
+            width: 38px;
             height: auto;
             mix-blend-mode: multiply; 
             transition: transform 0.4s ease;
@@ -136,10 +131,8 @@
             font-size: 1rem;
             font-weight: 300;
             line-height: 1.7;
-            color: var(--obsidian);
             max-width: 550px;
             margin: 1.5rem 0;
-            filter: url(#liquid-lens);
         }
 
         .waitlist-form {
@@ -158,10 +151,7 @@
             color: var(--obsidian);
             font-size: 0.85rem;
             outline: none;
-            transition: background 0.3s;
         }
-
-        input[type="email"]::placeholder { text-transform: uppercase; letter-spacing: 0.1em; color: var(--marble-grey); }
 
         button {
             width: 320px;
@@ -181,26 +171,16 @@
         }
 
         @media (max-width: 600px) {
-            .hero-composition { max-width: 100%; margin-top: 2rem; }
-            .kleio-logo { max-width: 200px; }
-            .logo-wrapper.active .wing-node.left { transform: translateX(-110px) translateY(-50%); }
-            .logo-wrapper.active .wing-node.right { transform: translateX(110px) translateY(-50%); }
+            .hero-composition { min-height: 300px; }
+            .kleio-logo { max-width: 220px; }
+            .logo-wrapper.active .wing-node.left { transform: translateX(-120px) translateY(-50%); }
+            .logo-wrapper.active .wing-node.right { transform: translateX(120px) translateY(-50%); }
         }
     </style>
 </head>
 <body>
 
-    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
-        <filter id="liquid-lens">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="1" result="warp">
-                <animate attributeName="baseFrequency" values="0.015 0.02; 0.025 0.03; 0.015 0.02" dur="6s" repeatCount="indefinite" />
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
-
     <div class="container">
-        
         <div class="hero-composition">
             <video autoplay loop muted playsinline class="hero-video">
                 <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4" type="video/mp4">
@@ -208,16 +188,16 @@
             
             <div class="logo-wrapper" id="logo-wrapper">
                 <div class="wing-node left">
-  <a href="./identity-manifest.html" class="menu-item"> 
-    <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
-    <span>Learn More</span>
-  </a>
-</div>
+                    <a href="./identity-manifest.html" class="menu-item"> 
+                        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
+                        <span>Learn More</span>
+                    </a>
+                </div>
 
                 <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true" alt="Kleio Logo" class="kleio-logo" id="logo-trigger">
                 
                 <div class="wing-node right">
-                    <a href="#" target="_blank" class="menu-item">
+                    <a href="https://x.com/kleio_eco" target="_blank" class="menu-item">
                         <span>Social Media</span>
                         <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
                     </a>
@@ -225,13 +205,12 @@
             </div>
         </div>
         
-        <p class="description">A dedicated infrastructure for physical, human-authored art. Kleio provides sovereign creators with a frictionless economic engine, and collectors with an uncompromising presentation layer. The archive is forming.</p>
+        <p class="description">A dedicated infrastructure for physical, human-authored art. Kleio provides creators with a frictionless economic engine and collectors with an uncompromising presentation layer.</p>
 
         <form class="waitlist-form" action="https://formspree.io/f/mnjlylod" method="POST">
             <input type="email" name="email" placeholder="Enter your email" required>
             <button type="submit">Sign Up For Early Access</button>
         </form>
-
     </div>
 
     <script>
@@ -249,6 +228,5 @@
             }
         });
     </script>
-
 </body>
 </html>
