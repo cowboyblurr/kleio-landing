@@ -1,238 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLEIO | The Archive is Forming</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLEIO | The Archive is Forming</title>
 
-    <style>
-        :root {
-            --vault-bg: #FFFFFF; 
-            --obsidian: #1A1A1A;
-            --marble-grey: #8A8A8A;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-        body, html {
-            margin: 0; padding: 0;
-            min-height: 100vh;
-            background-color: var(--vault-bg);
-            color: var(--obsidian);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+<style>
+:root {
+    --vault-bg: #FFFFFF; 
+    --obsidian: #1A1A1A;
+}
 
-        .container {
-            max-width: 800px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
+body, html {
+    margin:0;
+    min-height:100vh;
+    background:var(--vault-bg);
+    color:var(--obsidian);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Inter', sans-serif;
+}
 
-        .container > * { animation: fadein 1.5s ease-in-out forwards; }
+.container {
+    text-align:center;
+}
 
-        .hero-composition {
-            position: relative;
-            width: 100%;
-            max-width: 700px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 1rem;
-            min-height: 400px;
-        }
+.hero-composition {
+    position:relative;
+    max-width:700px;
+}
 
-        .hero-video {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            pointer-events: none; 
-        }
+.hero-video {
+    width:100%;
+    pointer-events:none;
+}
 
-        .logo-wrapper {
-            position: absolute; 
-            z-index: 10;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* FIXED STRUCTURE */
+.logo-wrapper {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
 
-        .kleio-logo {
-            max-width: 310px; 
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            position: relative;
-            z-index: 5;
-        }
+/* LOGO clickable */
+.kleio-logo {
+    max-width:310px;
+    cursor:pointer;
+    z-index:5;
+    position:relative;
+}
 
-        .kleio-logo:hover { transform: scale(1.03); }
+/* NODES */
+.wing-node {
+    position:absolute;
+    top:50%;
+    opacity:0;
+    visibility:hidden;
+    transition:.5s;
+    z-index:20;
+}
 
-        .wing-node {
-            position: absolute;
-            top: 50%;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex;
-            align-items: center;
-            z-index: 20;
-            white-space: nowrap;
-        }
+.logo-wrapper.active .left {
+    opacity:1;
+    visibility:visible;
+    transform:translate(-190px,-50%);
+}
 
-        .logo-wrapper.active .wing-node.left {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-190px) translateY(-50%);
-        }
+.logo-wrapper.active .right {
+    opacity:1;
+    visibility:visible;
+    transform:translate(190px,-50%);
+}
 
-        .logo-wrapper.active .wing-node.right {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(190px) translateY(-50%);
-        }
+.menu-item {
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    text-decoration:none;
+    color:black;
+    font-size:.8rem;
+    letter-spacing:.12em;
+}
 
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            color: var(--obsidian);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            transition: all 0.3s ease;
-        }
-
-        .menu-icon {
-            width: 38px;
-            height: auto;
-            mix-blend-mode: multiply; 
-            transition: transform 0.4s ease;
-        }
-
-        p.description {
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.7;
-            max-width: 550px;
-            margin: 1.5rem 0;
-        }
-
-        .waitlist-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            align-items: center;
-            width: 100%;
-        }
-
-        input[type="email"] {
-            width: 320px;
-            padding: 1.2rem;
-            background: transparent;
-            border: 1px solid var(--obsidian);
-            color: var(--obsidian);
-            font-size: 0.85rem;
-            outline: none;
-        }
-
-        button {
-            width: 320px;
-            padding: 1.2rem;
-            background-color: var(--obsidian);
-            color: var(--vault-bg); 
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-
-        @keyframes fadein {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 600px) {
-            .hero-composition { min-height: 300px; }
-            .kleio-logo { max-width: 220px; }
-            .logo-wrapper.active .wing-node.left { transform: translateX(-120px) translateY(-50%); }
-            .logo-wrapper.active .wing-node.right { transform: translateX(120px) translateY(-50%); }
-        }
-    </style>
+.menu-icon {
+    width:38px;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="hero-composition">
-            <video autoplay loop muted playsinline class="hero-video">
-                <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4" type="video/mp4">
-            </video>
-            
-            <div class="logo-wrapper" id="logo-wrapper">
+<div class="container">
+<div class="hero-composition">
 
-                <!-- 🔥 FINAL FIXED LEARN MORE -->
-                <div class="wing-node left">
-                    <a href="/kleio-landing/identity-manifest.html"
-                       class="menu-item"
-                       onclick="window.location.href=this.href; return false;">
-                        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
-                        <span>Learn More</span>
-                    </a>
-                </div>
+<video autoplay loop muted playsinline class="hero-video">
+<source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4">
+</video>
 
-                <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true" alt="Kleio Logo" class="kleio-logo" id="logo-trigger">
-                
-                <div class="wing-node right">
-                    <a href="https://x.com/kleio_eco" target="_blank" class="menu-item">
-                        <span>Social Media</span>
-                        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <p class="description">
-            A dedicated infrastructure for physical, human-authored art. Kleio provides creators with a frictionless economic engine and collectors with an uncompromising presentation layer.
-        </p>
+<div class="logo-wrapper" id="logoWrapper">
 
-        <form class="waitlist-form" action="https://formspree.io/f/mnjlylod" method="POST">
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <button type="submit">Sign Up For Early Access</button>
-        </form>
-    </div>
+<!-- LEFT (FIXED LINK) -->
+<div class="wing-node left">
+<a href="/kleio-landing/identity-manifest.html" class="menu-item">
+<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
+<span>Learn More</span>
+</a>
+</div>
 
-    <script>
-        const logoWrapper = document.getElementById('logo-wrapper');
-        const logoTrigger = document.getElementById('logo-trigger');
+<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true"
+class="kleio-logo"
+id="logo">
 
-        logoTrigger.addEventListener('click', (e) => {
-            logoWrapper.classList.toggle('active');
-            e.stopPropagation();
-        });
+<!-- RIGHT (FIXED LINK) -->
+<div class="wing-node right">
+<a href="https://x.com/kleio_eco" target="_blank" class="menu-item">
+<span>Social Media</span>
+<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
+</a>
+</div>
 
-        document.addEventListener('click', (e) => {
-            if (!logoWrapper.contains(e.target)) {
-                logoWrapper.classList.remove('active');
-            }
-        });
-    </script>
+</div>
+</div>
+</div>
+
+<script>
+const logo = document.getElementById('logo');
+const wrapper = document.getElementById('logoWrapper');
+
+/* ONLY logo toggles */
+logo.addEventListener('click', (e)=>{
+    wrapper.classList.toggle('active');
+    e.stopPropagation();
+});
+
+/* click outside closes */
+document.addEventListener('click',(e)=>{
+    if(!wrapper.contains(e.target)){
+        wrapper.classList.remove('active');
+    }
+});
+</script>
 
 </body>
 </html>
