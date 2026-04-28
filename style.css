@@ -15,7 +15,8 @@ body, html {
     overflow-x: hidden;
 }
 
-/* --- 2. LANDING PAGE DYNAMICS --- */
+/* --- 2. DYNAMIC BODY LOGIC --- */
+/* This centers your home page, but tells the identity page to behave like a normal grid */
 body:not(.identity-page) {
     display: flex;
     flex-direction: column;
@@ -24,85 +25,63 @@ body:not(.identity-page) {
     text-align: center;
 }
 
-.container {
-    max-width: 800px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.video-wrapper {
-    width: 100%;
-    max-width: 700px;
-    margin-top: 3rem;
-    margin-bottom: -8rem;
-    display: flex;
-    justify-content: center;
-}
-
-.hero-video { width: 100%; height: auto; object-fit: contain; }
-
-.logo-wrapper { position: relative; z-index: 10; display: flex; justify-content: center; }
-.kleio-logo { max-width: 400px; cursor: pointer; transition: transform 0.4s ease; }
-
-.logo-wrapper.active .wing-node.left { opacity: 1; visibility: visible; transform: translateX(-150px) translateY(-50%); }
-.logo-wrapper.active .wing-node.right { opacity: 1; visibility: visible; transform: translateX(150px) translateY(-50%); }
-
-/* --- 3. IDENTITY PAGE SHIELDED GRID --- */
 body.identity-page {
     display: block; 
     overflow-y: auto; 
 }
 
+/* --- 3. LANDING PAGE STYLES (INDEX.HTML) --- */
+.container { max-width: 800px; padding: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.video-wrapper { width: 100%; max-width: 700px; margin-top: 3rem; margin-bottom: -8rem; display: flex; justify-content: center; }
+.hero-video { width: 100%; height: auto; object-fit: contain; }
+.logo-wrapper { position: relative; z-index: 10; display: flex; justify-content: center; }
+.kleio-logo { max-width: 400px; cursor: pointer; transition: transform 0.4s ease; }
+.logo-wrapper.active .wing-node.left { opacity: 1; visibility: visible; transform: translateX(-150px) translateY(-50%); }
+.logo-wrapper.active .wing-node.right { opacity: 1; visibility: visible; transform: translateX(150px) translateY(-50%); }
+
+/* --- 4. IDENTITY MANIFEST (SHIELDED GRID) --- */
 #identity-manifest-root {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     min-height: 100vh !important;
     width: 100% !important;
+    background-color: #FFFFFF !important;
 }
 
 .back-link {
-    position: fixed;
-    top: 1.5rem;
-    left: 1.5rem;
-    text-decoration: none;
-    color: #111;
-    font-weight: 600;
-    letter-spacing: 2px;
-    z-index: 100;
+    position: fixed; top: 1.5rem; left: 1.5rem; text-decoration: none;
+    color: #111; font-weight: 600; letter-spacing: 2px; z-index: 100;
 }
 
 .portrait-viewport { position: relative; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 .portrait-stack { position: relative; width: 450px; height: 600px; }
 .identity-portrait { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; }
 
+/* 10% Enlarged Floating Icons */
 .node-icon {
     position: absolute; z-index: 20; cursor: pointer;
-    filter: url(#liquid-lens);
-    animation: floatNode 4s ease-in-out infinite;
+    filter: url(#liquid-lens); animation: floatNode 4s ease-in-out infinite;
 }
 .node-icon img { width: 80px; height: auto; transition: transform 0.4s ease; }
 .node-icon:hover img { transform: scale(1.25); }
 
-#node-psychology { top: 12%; left: 8%; }
-#node-gallery { top: 8%; right: 12%; }
-#node-data { bottom: 28%; right: 12%; }
+#node-psychology { top: 12%; left: 8%; animation-delay: 0s; }
+#node-gallery { top: 8%; right: 12%; animation-delay: 1s; }
+#node-data { bottom: 28%; right: 12%; animation-delay: 2s; }
 
 @keyframes floatNode { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
+/* Centered Hierarchy */
 .content-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
 .identity-logo { width: 100%; max-width: 450px; margin-bottom: 25px; display: block; margin: 0 auto; }
 #dynamic-title { font-size: 1.8rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; font-weight: 300; }
+.manifesto-vault { width: 100%; max-width: 500px; }
 .state-desc { display: none; opacity: 0; }
 .state-desc p { line-height: 1.8; font-weight: 300; font-size: 1.1rem; color: #444; }
 
-/* STATE VISIBILITY */
+/* State Visibility */
 .state-mirror .face-mirror, .state-psychology .face-psychology,
 .state-gallery .face-gallery, .state-data .face-data { opacity: 1 !important; }
-
 .state-mirror .desc-mirror, .state-psychology .desc-psychology,
 .state-gallery .desc-gallery, .state-data .desc-data { display: block !important; opacity: 1 !important; }
-
 .state-gallery .face-gallery { filter: url(#wave-shuffler) !important; }
