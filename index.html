@@ -6,7 +6,6 @@
 <title>KLEIO | The Archive is Forming</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -15,28 +14,29 @@
     --obsidian: #1A1A1A;
 }
 
-body, html {
+body {
     margin:0;
-    min-height:100vh;
     background:var(--vault-bg);
-    color:var(--obsidian);
     display:flex;
     justify-content:center;
     align-items:center;
+    height:100vh;
     font-family:'Inter', sans-serif;
 }
 
-.hero-composition {
+/* HERO */
+.hero {
     position:relative;
-    max-width:700px;
+    width:700px;
 }
 
-.hero-video {
+video {
     width:100%;
     pointer-events:none;
 }
 
-.logo-wrapper {
+/* LOGO WRAPPER */
+.wrapper {
     position:absolute;
     top:50%;
     left:50%;
@@ -44,45 +44,65 @@ body, html {
 }
 
 /* LOGO */
-.kleio-logo {
-    max-width:300px;
+.logo {
+    width:300px;
     cursor:pointer;
     position:relative;
-    z-index:5;
+    z-index:10;
 }
 
 /* NODES */
-.wing-node {
+.node {
     position:absolute;
     top:50%;
     opacity:0;
     visibility:hidden;
     transition:.5s;
-    z-index:50;
-    cursor:pointer;
+    z-index:20;
 }
 
-.logo-wrapper.active .left {
+/* IMPORTANT FIX */
+.node a {
+    pointer-events:auto;
+}
+
+/* prevent parent blocking */
+.wrapper {
+    pointer-events:none;
+}
+.logo {
+    pointer-events:auto;
+}
+.node {
+    pointer-events:none;
+}
+.node a {
+    pointer-events:auto;
+}
+
+/* positions */
+.wrapper.active .left {
     opacity:1;
     visibility:visible;
-    transform:translate(-190px,-50%);
+    transform:translate(-200px,-50%);
 }
-
-.logo-wrapper.active .right {
+.wrapper.active .right {
     opacity:1;
     visibility:visible;
-    transform:translate(190px,-50%);
+    transform:translate(200px,-50%);
 }
 
-.menu-item {
+.menu {
     display:flex;
     align-items:center;
-    gap:.6rem;
+    gap:.5rem;
     font-size:.8rem;
-    letter-spacing:.12em;
+    letter-spacing:.1em;
+    color:black;
+    text-decoration:none;
 }
 
-.menu-icon {
+.menu img {
     width:38px;
 }
 </style>
@@ -90,62 +110,51 @@ body, html {
 
 <body>
 
-<div class="hero-composition">
+<div class="hero">
 
-<video autoplay loop muted playsinline class="hero-video">
+<video autoplay loop muted playsinline>
 <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4">
 </video>
 
-<div class="logo-wrapper" id="wrapper">
+<div class="wrapper" id="wrap">
 
-<!-- LEFT (JS NAVIGATION) -->
-<div class="wing-node left" id="learnMore">
-    <div class="menu-item">
-        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
-        <span>Learn More</span>
-    </div>
+<!-- LEFT -->
+<div class="node left">
+<a href="./identity-manifest.html" class="menu">
+<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true">
+<span>Learn More</span>
+</a>
 </div>
 
+<!-- LOGO -->
 <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true"
-class="kleio-logo"
+class="logo"
 id="logo">
 
 <!-- RIGHT -->
-<div class="wing-node right" id="social">
-    <div class="menu-item">
-        <span>Social Media</span>
-        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
-    </div>
+<div class="node right">
+<a href="https://x.com/kleio_eco" target="_blank" class="menu">
+<span>Social Media</span>
+<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true">
+</a>
 </div>
 
+</div>
 </div>
 
 <script>
-const wrapper = document.getElementById('wrapper');
 const logo = document.getElementById('logo');
-const learnMore = document.getElementById('learnMore');
-const social = document.getElementById('social');
+const wrap = document.getElementById('wrap');
 
-/* TOGGLE MENU */
 logo.onclick = (e)=>{
-    wrapper.classList.toggle('active');
+    wrap.classList.toggle('active');
     e.stopPropagation();
 };
 
-/* CLOSE OUTSIDE */
-document.addEventListener('click', (e)=>{
-    if(!wrapper.contains(e.target)){
-        wrapper.classList.remove('active');
+document.onclick = (e)=>{
+    if(!wrap.contains(e.target)){
+        wrap.classList.remove('active');
     }
-});
-
-/* 🔥 FORCE NAVIGATION (bulletproof) */
-learnMore.onclick = ()=>{
-    window.location.href = "/kleio-landing/identity-manifest.html";
-};
-
-social.onclick = ()=>{
-    window.open("https://x.com/kleio_eco", "_blank");
 };
 </script>
 
