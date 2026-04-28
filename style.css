@@ -2,11 +2,6 @@
 :root {
     --vault-bg: #FFFFFF; 
     --obsidian: #1A1A1A;
-    --marble-grey: #8A8A8A;
-    --bg-default: #FFFFFF;
-    --bg-a: #E6F7F2;
-    --bg-b: #D8D1E6;
-    --bg-c: #F0F0F0;
 }
 
 body, html {
@@ -20,8 +15,8 @@ body, html {
     overflow-x: hidden;
 }
 
-/* --- 2. DYNAMIC BODY LOGIC --- */
-/* This ensures the home page stays centered, but the identity page can be a full grid */
+/* --- 2. LANDING PAGE LOGIC --- */
+/* Centers your index.html landing page */
 body:not(.identity-page) {
     display: flex;
     flex-direction: column;
@@ -30,75 +25,14 @@ body:not(.identity-page) {
     text-align: center;
 }
 
+/* --- 3. IDENTITY PAGE LOGIC --- */
+/* Enables the grid for your new page */
 body.identity-page {
     display: block; 
     overflow-y: auto; 
 }
 
-/* --- 3. LANDING PAGE (MUSEUM VAULT) --- */
-.container {
-    max-width: 800px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.video-wrapper {
-    width: 100%;
-    max-width: 700px;
-    margin-top: 3rem;
-    margin-bottom: -8rem;
-    display: flex;
-    justify-content: center;
-}
-
-.hero-video { width: 100%; height: auto; object-fit: contain; }
-
-.logo-wrapper { position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; }
-
-.kleio-logo {
-    max-width: 400px; 
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    position: relative;
-    z-index: 5;
-}
-
-.kleio-logo:hover { transform: scale(1.05); }
-
-.wing-node {
-    position: absolute;
-    top: 50%;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    display: flex;
-    align-items: center;
-    z-index: 2;
-}
-
-.logo-wrapper.active .wing-node.left { opacity: 1; visibility: visible; transform: translateX(-150px) translateY(-50%); }
-.logo-wrapper.active .wing-node.right { opacity: 1; visibility: visible; transform: translateX(150px) translateY(-50%); }
-
-.menu-item { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--obsidian); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; }
-.menu-icon { width: 35px; height: auto; mix-blend-mode: multiply; }
-
-p.description { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 550px; margin: 2rem 0; filter: url(#liquid-lens); }
-
-/* --- 4. MANIFESTO PAGE (FINGER NODES) --- */
-.manifesto-composition { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 600px; min-height: 560px; }
-.finger-node { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: signature-pulse 3s infinite ease-in-out; }
-.finger-node img { width: 500px; height: auto; object-fit: contain; }
-
-@keyframes signature-pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.03); }
-}
-
-/* --- 5. IDENTITY MANIFEST (SHIELDED GRID) --- */
+/* Shielded Identity Styles - Only affects the new page */
 #identity-manifest-root {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -112,7 +46,7 @@ p.description { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 
 #identity-manifest-root .portrait-stack { position: relative; width: 450px; height: 600px; }
 #identity-manifest-root .identity-portrait { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; }
 
-/* 10% Enlarged Floating Icons */
+/* Icons enlarged by 10% */
 #identity-manifest-root .node-icon {
     position: absolute; z-index: 20; cursor: pointer;
     filter: url(#liquid-lens);
@@ -121,14 +55,14 @@ p.description { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 
 #identity-manifest-root .node-icon img { width: 80px; height: auto; transition: transform 0.3s ease; }
 #identity-manifest-root .node-icon:hover img { transform: scale(1.2); }
 
-/* Cluster Position */
-#identity-manifest-root #node-psychology { top: 12%; left: 8%; animation-delay: 0s; }
-#identity-manifest-root #node-gallery { top: 8%; right: 12%; animation-delay: 1s; }
-#identity-manifest-root #node-data { bottom: 28%; right: 12%; animation-delay: 2s; }
+/* Orbital positioning cluster */
+#identity-manifest-root #node-psychology { top: 12%; left: 8%; }
+#identity-manifest-root #node-gallery { top: 8%; right: 12%; }
+#identity-manifest-root #node-data { bottom: 28%; right: 12%; }
 
 @keyframes floatNode { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-/* Centered Right-Side Content */
+/* Centered content hierarchy */
 #identity-manifest-root .content-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
 #identity-manifest-root .identity-logo { width: 100%; max-width: 450px; margin-bottom: 25px; display: block; margin: 0 auto; }
 #identity-manifest-root #dynamic-title { font-size: 1.8rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; font-weight: 300; }
@@ -142,11 +76,5 @@ p.description { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 
 #identity-manifest-root.state-mirror .desc-mirror, #identity-manifest-root.state-psychology .desc-psychology,
 #identity-manifest-root.state-gallery .desc-gallery, #identity-manifest-root.state-data .desc-data { display: block !important; opacity: 1 !important; }
 
-/* Special Shuffled Wave Effect for Gallery */
+/* Special Wave Effect for Gallery image */
 #identity-manifest-root.state-gallery .face-gallery { filter: url(#wave-shuffler) !important; }
-
-/* Responsive Grid */
-@media (max-width: 900px) {
-    #identity-manifest-root { grid-template-columns: 1fr !important; }
-    #identity-manifest-root .portrait-stack { width: 320px; height: 430px; }
-}
