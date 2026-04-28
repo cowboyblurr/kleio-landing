@@ -26,10 +26,6 @@ body, html {
     font-family:'Inter', sans-serif;
 }
 
-.container {
-    text-align:center;
-}
-
 .hero-composition {
     position:relative;
     max-width:700px;
@@ -40,7 +36,6 @@ body, html {
     pointer-events:none;
 }
 
-/* FIXED STRUCTURE */
 .logo-wrapper {
     position:absolute;
     top:50%;
@@ -48,12 +43,12 @@ body, html {
     transform:translate(-50%,-50%);
 }
 
-/* LOGO clickable */
+/* LOGO */
 .kleio-logo {
-    max-width:310px;
+    max-width:300px;
     cursor:pointer;
-    z-index:5;
     position:relative;
+    z-index:5;
 }
 
 /* NODES */
@@ -63,7 +58,8 @@ body, html {
     opacity:0;
     visibility:hidden;
     transition:.5s;
-    z-index:20;
+    z-index:50;
+    cursor:pointer;
 }
 
 .logo-wrapper.active .left {
@@ -82,8 +78,6 @@ body, html {
     display:flex;
     align-items:center;
     gap:.6rem;
-    text-decoration:none;
-    color:black;
     font-size:.8rem;
     letter-spacing:.12em;
 }
@@ -96,55 +90,63 @@ body, html {
 
 <body>
 
-<div class="container">
 <div class="hero-composition">
 
 <video autoplay loop muted playsinline class="hero-video">
 <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4">
 </video>
 
-<div class="logo-wrapper" id="logoWrapper">
+<div class="logo-wrapper" id="wrapper">
 
-<!-- LEFT (FIXED LINK) -->
-<div class="wing-node left">
-<a href="/kleio-landing/identity-manifest.html" class="menu-item">
-<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
-<span>Learn More</span>
-</a>
+<!-- LEFT (JS NAVIGATION) -->
+<div class="wing-node left" id="learnMore">
+    <div class="menu-item">
+        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
+        <span>Learn More</span>
+    </div>
 </div>
 
 <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO.png?raw=true"
 class="kleio-logo"
 id="logo">
 
-<!-- RIGHT (FIXED LINK) -->
-<div class="wing-node right">
-<a href="https://x.com/kleio_eco" target="_blank" class="menu-item">
-<span>Social Media</span>
-<img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
-</a>
+<!-- RIGHT -->
+<div class="wing-node right" id="social">
+    <div class="menu-item">
+        <span>Social Media</span>
+        <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
+    </div>
 </div>
 
-</div>
-</div>
 </div>
 
 <script>
+const wrapper = document.getElementById('wrapper');
 const logo = document.getElementById('logo');
-const wrapper = document.getElementById('logoWrapper');
+const learnMore = document.getElementById('learnMore');
+const social = document.getElementById('social');
 
-/* ONLY logo toggles */
-logo.addEventListener('click', (e)=>{
+/* TOGGLE MENU */
+logo.onclick = (e)=>{
     wrapper.classList.toggle('active');
     e.stopPropagation();
-});
+};
 
-/* click outside closes */
-document.addEventListener('click',(e)=>{
+/* CLOSE OUTSIDE */
+document.addEventListener('click', (e)=>{
     if(!wrapper.contains(e.target)){
         wrapper.classList.remove('active');
     }
 });
+
+/* 🔥 FORCE NAVIGATION (bulletproof) */
+learnMore.onclick = ()=>{
+    window.location.href = "/kleio-landing/identity-manifest.html";
+};
+
+social.onclick = ()=>{
+    window.open("https://x.com/kleio_eco", "_blank");
+};
 </script>
 
 </body>
