@@ -1,63 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLEIO | Identity Manifest</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body class="identity-page">
-    <a href="./index.html" class="back-link">BACK</a>
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('identity-manifest-root');
+    const title = document.getElementById('dynamic-title');
+    const nodes = document.querySelectorAll('.node-icon');
+    
+    const titleData = {
+        'mirror': 'THE MIRROR OF IDENTITY',
+        'psychology': 'THE PSYCHOLOGY OF FORM',
+        'gallery': 'THE CURATED MANIFESTATION',
+        'data': 'THE SOVEREIGN SYNTHESIS'
+    };
 
-    <svg style="width:0;height:0;position:absolute;" aria-hidden="true">
-        <filter id="liquid-lens">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="1" result="warp">
-                <animate attributeName="baseFrequency" values="0.015 0.02; 0.025 0.03; 0.015 0.02" dur="6s" repeatCount="indefinite" />
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <filter id="wave-shuffler">
-            <feTurbulence type="fractalNoise" baseFrequency="0.05 0.001" numOctaves="3" result="warp">
-                <animate attributeName="baseFrequency" values="0.05 0.001; 0.1 0.001; 0.05 0.001" dur="10s" repeatCount="indefinite" />
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="warp" scale="3" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
+    let lockedState = null;
 
-    <main id="identity-manifest-root" class="identity-container state-mirror">
-        <div class="portrait-viewport">
-            <div class="portrait-stack">
-                <img class="identity-portrait face-mirror" src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/main%20image%20.png?raw=true">
-                <img class="identity-portrait face-psychology" src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/psychology%20pic.png?raw=true">
-                <img class="identity-portrait face-gallery" src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/gallery%20image.png?raw=true">
-                <img class="identity-portrait face-data" src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/datatrustpic.png?raw=true">
-            </div>
+    const updateUI = (state) => {
+        container.className = `identity-container state-${state}`;
+        title.innerText = titleData[state];
+    };
 
-            <div class="node-icon" data-state="psychology" id="node-psychology">
-                <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Psychology.png?raw=true">
-            </div>
-            <div class="node-icon" data-state="gallery" id="node-gallery">
-                <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Gallery%20icon.png?raw=true">
-            </div>
-            <div class="node-icon" data-state="data" id="node-data">
-                <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/The%20Sovereign%20Data%20icon.png?raw=true">
-            </div>
-        </div>
+    nodes.forEach(node => {
+        const state = node.dataset.state;
 
-        <div class="content-panel">
-            <div class="identity-header">
-                <img class="identity-logo" src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20ECO%20LOGO.png?raw=true">
-                <h1 id="dynamic-title">THE MIRROR OF IDENTITY</h1>
-            </div>
-            <div class="manifesto-vault">
-                <div class="state-desc desc-mirror"><p>The archive does not dictate taste; it reflects it. What you see is a synthesis of your aesthetic and psychological archetype.</p></div>
-                <div class="state-desc desc-psychology"><p>The psychology of form is an intricate, intelligent design. We map the unseen psychological currents that dictate your desires.</p></div>
-                <div class="state-desc desc-gallery"><p>Your psychological archetype, rendered into reality. This is the gallery of your intuition—a strictly vetted selection of works.</p></div>
-                <div class="state-desc desc-data"><p>The archive learns through absolute consent. By harmonizing your auditory signatures, we synthesize a complete aesthetic profile.</p></div>
-            </div>
-        </div>
-    </main>
+        // Preview image on hover
+        node.addEventListener('mouseenter', () => {
+            if (!lockedState) updateUI(state);
+        });
 
-    <script src="./identity-engine.js"></script>
-</body>
-</html>
+        // Revert to Mirror on mouse leave
+        node.addEventListener('mouseleave', () => {
+            if (!lockedState) updateUI('mirror');
+        });
+        
+        // Lock image on click
+        node.addEventListener('click', () => {
+            if (lockedState === state) {
+                lockedState = null;
+                node.classList.remove('locked-node');
+                updateUI('mirror');
+            } else {
+                nodes.forEach(n => n.classList.remove('locked-node'));
+                lockedState = state;
+                node.classList.add('locked-node');
+                updateUI(state);
+            }
+        });
+    });
+});
