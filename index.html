@@ -60,7 +60,6 @@
             pointer-events: none; 
         }
 
-        /* 🔥 FIXED CLICK LAYERING */
         .logo-wrapper {
             position: absolute; 
             z-index: 10;
@@ -70,7 +69,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            pointer-events: none;
         }
 
         .kleio-logo {
@@ -80,7 +78,6 @@
             transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
             position: relative;
             z-index: 5;
-            pointer-events: auto;
         }
 
         .kleio-logo:hover { transform: scale(1.03); }
@@ -93,9 +90,8 @@
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             display: flex;
             align-items: center;
-            z-index: 20; /* 🔥 ABOVE LOGO */
+            z-index: 20;
             white-space: nowrap;
-            pointer-events: auto;
         }
 
         .logo-wrapper.active .wing-node.left {
@@ -120,7 +116,6 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             transition: all 0.3s ease;
-            pointer-events: auto;
         }
 
         .menu-icon {
@@ -192,9 +187,11 @@
             
             <div class="logo-wrapper" id="logo-wrapper">
 
-                <!-- ✅ FIXED LINK + CLICK -->
+                <!-- 🔥 FINAL FIXED LEARN MORE -->
                 <div class="wing-node left">
-                    <a href="/kleio-landing/identity-manifest.html" class="menu-item" onclick="event.stopPropagation();"> 
+                    <a href="/kleio-landing/identity-manifest.html"
+                       class="menu-item"
+                       onclick="window.location.href=this.href; return false;">
                         <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/Learn%20more%20icon%20.gif?raw=true" class="menu-icon">
                         <span>Learn More</span>
                     </a>
