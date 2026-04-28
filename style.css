@@ -1,9 +1,12 @@
-/* The Museum Vault Color Palette */
+/* --- 1. GLOBAL RESET & PALETTE --- */
 :root {
-    /* Locked to pure white to match the video background */
     --vault-bg: #FFFFFF; 
     --obsidian: #1A1A1A;
     --marble-grey: #8A8A8A;
+    --bg-default: #FFFFFF;
+    --bg-a: #E6F7F2;
+    --bg-b: #D8D1E6;
+    --bg-c: #F0F0F0;
 }
 
 body, html {
@@ -12,16 +15,27 @@ body, html {
     min-height: 100vh;
     background-color: var(--vault-bg);
     color: var(--obsidian);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
+/* --- 2. DYNAMIC BODY LOGIC --- */
+/* This ensures the home page stays centered, but the identity page can be a full grid */
+body:not(.identity-page) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+body.identity-page {
+    display: block; 
+    overflow-y: auto; 
+}
+
+/* --- 3. LANDING PAGE (MUSEUM VAULT) --- */
 .container {
     max-width: 800px;
     padding: 2rem;
@@ -31,33 +45,18 @@ body, html {
     gap: 1.5rem;
 }
 
-.container > * { animation: fadein 1.5s ease-in-out forwards; }
-
-/* Cinematic Video Centralization */
 .video-wrapper {
     width: 100%;
-    max-width: 700px; /* Lower this number to 600px if you also want to shrink the video size */
-    margin-top: 3rem; /* THE NUDGE: This physically brings the video down from the top of the screen */
+    max-width: 700px;
+    margin-top: 3rem;
     margin-bottom: -8rem;
-    overflow: hidden;
     display: flex;
     justify-content: center;
 }
 
-.hero-video {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
+.hero-video { width: 100%; height: auto; object-fit: contain; }
 
-/* --- THE FLOATING MENU ARCHITECTURE --- */
-.logo-wrapper {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.logo-wrapper { position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; }
 
 .kleio-logo {
     max-width: 400px; 
@@ -66,12 +65,10 @@ body, html {
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     position: relative;
     z-index: 5;
-    left: -5px; 
 }
 
 .kleio-logo:hover { transform: scale(1.05); }
 
-/* The Floating Interactive Nodes */
 .wing-node {
     position: absolute;
     top: 50%;
@@ -81,104 +78,75 @@ body, html {
     display: flex;
     align-items: center;
     z-index: 2;
-    white-space: nowrap;
 }
 
-/* Clean math for symmetrical floating placement */
-.logo-wrapper.active .wing-node.left {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-150px) translateY(-50%);
+.logo-wrapper.active .wing-node.left { opacity: 1; visibility: visible; transform: translateX(-150px) translateY(-50%); }
+.logo-wrapper.active .wing-node.right { opacity: 1; visibility: visible; transform: translateX(150px) translateY(-50%); }
+
+.menu-item { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--obsidian); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; }
+.menu-icon { width: 35px; height: auto; mix-blend-mode: multiply; }
+
+p.description { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 550px; margin: 2rem 0; filter: url(#liquid-lens); }
+
+/* --- 4. MANIFESTO PAGE (FINGER NODES) --- */
+.manifesto-composition { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 600px; min-height: 560px; }
+.finger-node { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: signature-pulse 3s infinite ease-in-out; }
+.finger-node img { width: 500px; height: auto; object-fit: contain; }
+
+@keyframes signature-pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.03); }
 }
 
-.logo-wrapper.active .wing-node.right {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(150px) translateY(-50%);
+/* --- 5. IDENTITY MANIFEST (SHIELDED GRID) --- */
+#identity-manifest-root {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    min-height: 100vh !important;
+    background-color: #FFFFFF !important;
+    width: 100% !important;
+    margin: 0 !important;
 }
 
-.menu-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
-    color: var(--obsidian);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    transition: all 0.3s ease;
-}
+#identity-manifest-root .portrait-viewport { position: relative; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+#identity-manifest-root .portrait-stack { position: relative; width: 450px; height: 600px; }
+#identity-manifest-root .identity-portrait { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; }
 
-.wing-node.left .menu-item:hover { transform: translateX(-5px); }
-.wing-node.right .menu-item:hover { transform: translateX(5px); }
-
-/* The GIF Icons */
-.menu-icon {
-    width: 35px; /* Sized specifically for your new GIF */
-    height: auto;
-    mix-blend-mode: multiply; /* Erases any white background on the GIF itself */
-    transition: transform 0.4s ease;
-}
-
-.menu-item:hover .menu-icon { transform: scale(1.2); }
-
-/* --- DESCRIPTION & FORM --- */
-p.description {
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--obsidian);
-    max-width: 550px;
-    margin: 2rem 0;
+/* 10% Enlarged Floating Icons */
+#identity-manifest-root .node-icon {
+    position: absolute; z-index: 20; cursor: pointer;
     filter: url(#liquid-lens);
+    animation: floatNode 4s ease-in-out infinite;
 }
+#identity-manifest-root .node-icon img { width: 80px; height: auto; transition: transform 0.3s ease; }
+#identity-manifest-root .node-icon:hover img { transform: scale(1.2); }
 
-.waitlist-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    align-items: center;
-    width: 100%;
-}
+/* Cluster Position */
+#identity-manifest-root #node-psychology { top: 12%; left: 8%; animation-delay: 0s; }
+#identity-manifest-root #node-gallery { top: 8%; right: 12%; animation-delay: 1s; }
+#identity-manifest-root #node-data { bottom: 28%; right: 12%; animation-delay: 2s; }
 
-input[type="email"] {
-    width: 320px;
-    padding: 1.2rem;
-    background: transparent;
-    border: 1px solid var(--obsidian);
-    color: var(--obsidian);
-    font-size: 0.85rem;
-    outline: none;
-    transition: background 0.3s;
-}
+@keyframes floatNode { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-input[type="email"]:focus { background: rgba(0,0,0,0.02); }
+/* Centered Right-Side Content */
+#identity-manifest-root .content-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
+#identity-manifest-root .identity-logo { width: 100%; max-width: 450px; margin-bottom: 25px; display: block; margin: 0 auto; }
+#identity-manifest-root #dynamic-title { font-size: 1.8rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; font-weight: 300; }
+#identity-manifest-root .manifesto-vault { width: 100%; max-width: 500px; }
+#identity-manifest-root .state-desc { display: none; opacity: 0; }
+#identity-manifest-root .state-desc p { line-height: 1.8; font-weight: 300; font-size: 1.1rem; color: #444; }
 
-button {
-    width: 320px;
-    padding: 1.2rem;
-    background-color: var(--obsidian);
-    color: var(--vault-bg); 
-    border: none;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
+/* State Visibility */
+#identity-manifest-root.state-mirror .face-mirror, #identity-manifest-root.state-psychology .face-psychology,
+#identity-manifest-root.state-gallery .face-gallery, #identity-manifest-root.state-data .face-data { opacity: 1 !important; }
+#identity-manifest-root.state-mirror .desc-mirror, #identity-manifest-root.state-psychology .desc-psychology,
+#identity-manifest-root.state-gallery .desc-gallery, #identity-manifest-root.state-data .desc-data { display: block !important; opacity: 1 !important; }
 
-button:hover { opacity: 0.9; }
+/* Special Shuffled Wave Effect for Gallery */
+#identity-manifest-root.state-gallery .face-gallery { filter: url(#wave-shuffler) !important; }
 
-@keyframes fadein {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Mobile Tweaks */
-@media (max-width: 600px) {
-    .hero-video { max-width: 100%; }
-    .logo-wrapper.active .wing-node.left { transform: translateX(-95px) translateY(-50%); }
-    .logo-wrapper.active .wing-node.right { transform: translateX(95px) translateY(-50%); }
-    .menu-item { font-size: 0.65rem; }
-    .menu-icon { width: 28px; }
+/* Responsive Grid */
+@media (max-width: 900px) {
+    #identity-manifest-root { grid-template-columns: 1fr !important; }
+    #identity-manifest-root .portrait-stack { width: 320px; height: 430px; }
 }
