@@ -1,0 +1,164 @@
+body.identity-page {
+  margin: 0;
+  background: #fff;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+body.identity-page .back-link {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  letter-spacing: 2px;
+  z-index: 100;
+}
+
+body.identity-page #identity-manifest-root.identity-container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+body.identity-page #identity-manifest-root .portrait-viewport {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 6.5rem 0 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body.identity-page #identity-manifest-root .portrait-stack {
+  position: absolute;
+  left: 6%;
+  bottom: 2rem;
+  width: min(40vw, 430px);
+  height: min(calc(100vh - 8.5rem), 560px);
+  z-index: 10;
+}
+
+body.identity-page #identity-manifest-root .identity-portrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  will-change: opacity, filter;
+}
+
+body.identity-page #identity-manifest-root .node-icon {
+  position: absolute;
+  z-index: 20;
+  cursor: pointer;
+  filter: url(#liquid-lens);
+  animation: floatNode 4s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+body.identity-page #identity-manifest-root .node-icon img {
+  width: 72px;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+body.identity-page #identity-manifest-root #node-psychology { top: 20%; left: 24%; }
+body.identity-page #identity-manifest-root #node-gallery { top: 18%; left: 52%; }
+body.identity-page #identity-manifest-root #node-data { top: 46%; left: 69%; }
+
+body.identity-page #identity-manifest-root .node-icon:hover img,
+body.identity-page #identity-manifest-root .locked-node img {
+  transform: scale(1.25);
+}
+
+body.identity-page #identity-manifest-root .node-icon::before,
+body.identity-page #identity-manifest-root .node-icon::after {
+  content: none;
+}
+
+@keyframes floatNode {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+body.identity-page #identity-manifest-root .content-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 6.5rem 5% 2rem;
+  box-sizing: border-box;
+}
+
+body.identity-page #identity-manifest-root .identity-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+body.identity-page #identity-manifest-root .identity-logo {
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 10px;
+}
+
+body.identity-page #identity-manifest-root #dynamic-title {
+  width: 100%;
+  margin: 0 0 14px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: clamp(1rem, 2.1vw, 1.7rem);
+  letter-spacing: clamp(1px, 0.25vw, 4px);
+  overflow-wrap: anywhere;
+}
+
+body.identity-page #identity-manifest-root .manifesto-vault {
+  width: 100%;
+  max-width: 500px;
+}
+
+body.identity-page #identity-manifest-root .state-desc {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.identity-page #identity-manifest-root .state-desc p {
+  margin: 0;
+  font-size: clamp(0.86rem, 1.2vw, 1rem);
+  line-height: 1.55;
+  color: #444;
+  overflow-wrap: anywhere;
+}
+
+body.identity-page #identity-manifest-root.state-mirror .face-mirror,
+body.identity-page #identity-manifest-root.state-psychology .face-psychology,
+body.identity-page #identity-manifest-root.state-gallery .face-gallery,
+body.identity-page #identity-manifest-root.state-data .face-data {
+  opacity: 1;
+}
+
+body.identity-page #identity-manifest-root.state-mirror .desc-mirror,
+body.identity-page #identity-manifest-root.state-psychology .desc-psychology,
+body.identity-page #identity-manifest-root.state-gallery .desc-gallery,
+body.identity-page #identity-manifest-root.state-data .desc-data {
+  display: block;
+  opacity: 1;
+}
+
+body.identity-page #identity-manifest-root.state-gallery .face-gallery {
+  filter: url(#wave-shuffler);
+}

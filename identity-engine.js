@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.querySelector('.identity-container');
+  const container = document.getElementById('identity-manifest-root');
   const title = document.getElementById('dynamic-title');
   const nodes = document.querySelectorAll('.node-icon');
+  if (!container || !title || !nodes.length) return;
   
   const titleData = {
     'mirror': 'THE MIRROR OF IDENTITY',
     'psychology': 'THE PSYCHOLOGY OF FORM',
-    'gallery': 'THE CURATED MANIFESTATION',
+    'gallery': 'THE ARCHITECTURAL BRIDGE',
     'data': 'THE SOVEREIGN SYNTHESIS'
   };
 
@@ -20,14 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
   nodes.forEach(node => {
     const state = node.dataset.state;
 
+    // Preview state on hover
     node.addEventListener('mouseenter', () => {
       if (!lockedState) updateUI(state);
     });
 
+    // Revert if not locked
     node.addEventListener('mouseleave', () => {
       if (!lockedState) updateUI('mirror');
     });
     
+    // Toggle state on click
     node.addEventListener('click', () => {
       if (lockedState === state) {
         lockedState = null;

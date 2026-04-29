@@ -1,9 +1,6 @@
 const manifestoContent = {
   default: {
-    copy: `THE ARCHIVE IS FORMING.
-
-
-A permanent infrastructure for human authorship. Kleio consecrates the Lifecycle of the Masterpiece. Select a signature node above to explore our foundational protocols.`,
+    copy: `THE ECOSYSTEM IS FORMING. A sovereign infrastructure for human authorship. Kleio consecrates the lifecycle of the masterpiece, stripping away the friction of legacy art markets. We return absolute control to the creator and grant collectors an uncompromising presentation layer. Select a signature node above to explore our foundational protocols.`,
     bg: 'var(--bg-default)'
   },
   'copy-provenance': {
