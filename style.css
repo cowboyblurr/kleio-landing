@@ -252,6 +252,8 @@ body.manifesto-page {
     overflow: hidden !important; /* Strict prevent scrolling */
     margin: 0;
     position: relative;
+    display: block;
+    min-height: 100vh;
 }
 
 .manifesto-composition {
@@ -278,9 +280,15 @@ body.manifesto-page .container {
 }
 
 body.manifesto-page .manifesto-composition {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
     height: 100%;
     min-height: 0;
     margin: 0;
+    max-width: none;
+    z-index: 5;
 }
 
 /* Typewriter description positioning (bottom-left) */
@@ -328,17 +336,31 @@ body.typewriter-done #typewriter-text::after {
 }
 
 @media (max-width: 768px) {
+    body.manifesto-page .manifesto-composition {
+        align-items: start;
+        padding-top: 8%;
+        box-sizing: border-box;
+    }
+
     .description-container {
-        bottom: 6%;
-        left: 5%;
-        width: 90%;
+        bottom: 4%;
+        left: 4%;
+        width: 84%;
         min-width: 0;
-        max-width: none;
+        max-width: 360px;
+    }
+
+    #logo-trigger-reset {
+        width: min(320px, 48vh, 74vw);
+    }
+
+    .finger-node img {
+        width: min(390px, 58vh, 88vw);
     }
 }
 
 #logo-trigger-reset {
-    width: min(435px, 75vw);
+    width: min(435px, 62vh, 75vw);
     max-width: none;
     height: auto;
     position: relative;
@@ -366,7 +388,7 @@ body.typewriter-done #typewriter-text::after {
 }
 
 .finger-node img {
-    width: 500px;
+    width: min(500px, 72vh, 88vw);
     height: auto;
     object-fit: contain;
     display: block;

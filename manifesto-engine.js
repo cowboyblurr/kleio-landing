@@ -135,8 +135,7 @@ if (resetTrigger) {
 
 // --- Typewriter intro (no hover/click conflict) ---
 document.addEventListener('DOMContentLoaded', () => {
-  const typeText =
-    'THE ECOSYSTEM IS FORMING. A sovereign infrastructure for human authorship. Kleio consecrates the lifecycle of the masterpiece, stripping away the friction of legacy art markets. We return absolute control to the creator and grant collectors an uncompromising presentation layer. Select a signature node above to explore our foundational protocols.';
+  const typeText = manifestoContent.default.copy;
 
   // Ensure page background matches the default state immediately.
   applyManifestoState('default', { updateCopy: false });
