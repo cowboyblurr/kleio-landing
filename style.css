@@ -247,6 +247,11 @@ button:hover { opacity: 0.9; }
 body.manifesto-page {
     background-color: var(--bg-default);
     transition: background-color 1.2s ease;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden !important; /* Strict prevent scrolling */
+    margin: 0;
+    position: relative;
 }
 
 .manifesto-composition {
@@ -258,6 +263,78 @@ body.manifesto-page {
     max-width: 600px;
     margin: 0 auto;
     min-height: 560px;
+}
+
+/* Learn-more viewport lock + composition sizing */
+body.manifesto-page .container {
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    gap: 0;
+}
+
+body.manifesto-page .manifesto-composition {
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+}
+
+/* Typewriter description positioning (bottom-left) */
+.description-container {
+    position: absolute;
+    bottom: 8%;
+    left: 8%;
+    width: 35%;
+    min-width: 300px;
+    max-width: 450px;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+    z-index: 50;
+    animation: none !important;
+}
+
+body.manifesto-page .container > * {
+    animation: none !important;
+}
+
+#typewriter-text {
+    margin: 0;
+    font-weight: 300;
+    color: var(--obsidian);
+    filter: url(#liquid-lens);
+    white-space: normal;
+}
+
+/* Blinking terminal cursor */
+#typewriter-text::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+body.typewriter-done #typewriter-text::after {
+    opacity: 0;
+    animation: none;
+}
+
+@media (max-width: 768px) {
+    .description-container {
+        bottom: 6%;
+        left: 5%;
+        width: 90%;
+        min-width: 0;
+        max-width: none;
+    }
 }
 
 #logo-trigger-reset {

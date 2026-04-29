@@ -26,7 +26,7 @@ A frictionless singularity between the physical masterpiece and the digital vaul
   }
 };
 
-const copyDisplay = document.getElementById('manifesto-copy-display');
+const copyDisplay = document.getElementById('typewriter-text');
 const page = document.body;
 const resetTrigger = document.getElementById('logo-trigger-reset');
 const fingerNodes = document.querySelectorAll('.finger-node');
@@ -41,17 +41,18 @@ const fingerHotspots = {
 };
 
 let hoveredFingerId = null;
+let typingRunId = 0;
 
-function applyManifestoState(stateKey) {
+function applyManifestoState(stateKey, options = { updateCopy: true }) {
   const state = manifestoContent[stateKey] || manifestoContent.default;
 
-  if (copyDisplay) {
+  // If we are about to update the text, cancel the typewriter run so it won't fight with user interactions.
+  if (options.updateCopy && copyDisplay) {
+    typingRunId++;
     copyDisplay.textContent = state.copy;
   }
 
-  if (page) {
-    page.style.backgroundColor = state.bg;
-  }
+  if (page) page.style.backgroundColor = state.bg;
 }
 
 function applyManifestoNode(node) {
@@ -65,7 +66,7 @@ function applyManifestoNode(node) {
     return;
   }
 
-  applyManifestoState(stateKey);
+  applyManifestoState(stateKey, { updateCopy: true });
 }
 
 function setHoveredFinger(nodeId) {
@@ -132,4 +133,35 @@ if (resetTrigger) {
   });
 }
 
-applyManifestoState('default');
+// --- Typewriter intro (no hover/click conflict) ---
+document.addEventListener('DOMContentLoaded', () => {
+  const typeText =
+    'THE ECOSYSTEM IS FORMING. A sovereign infrastructure for human authorship. Kleio consecrates the lifecycle of the masterpiece, stripping away the friction of legacy art markets. We return absolute control to the creator and grant collectors an uncompromising presentation layer. Select a signature node above to explore our foundational protocols.';
+
+  // Ensure page background matches the default state immediately.
+  applyManifestoState('default', { updateCopy: false });
+
+  if (!copyDisplay) return;
+  copyDisplay.innerHTML = '';
+  document.body.classList.remove('typewriter-done');
+
+  typingRunId++;
+  const runId = typingRunId;
+
+  let i = 0;
+  const speed = 25; // ms per character
+
+  function typeWriter() {
+    if (runId !== typingRunId) return; // cancelled
+
+    if (i < typeText.length) {
+      copyDisplay.textContent += typeText.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    } else {
+      document.body.classList.add('typewriter-done');
+    }
+  }
+
+  setTimeout(typeWriter, 500);
+});
