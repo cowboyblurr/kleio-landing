@@ -314,7 +314,7 @@ body.manifesto-page .container > * {
     margin: 0;
     font-weight: 300;
     color: var(--obsidian);
-    filter: url(#liquid-lens);
+    filter: none;
     white-space: normal;
 }
 

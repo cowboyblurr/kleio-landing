@@ -134,7 +134,7 @@ if (resetTrigger) {
 }
 
 // --- Typewriter intro (no hover/click conflict) ---
-document.addEventListener('DOMContentLoaded', () => {
+function initTypewriterIntro() {
   const typeText = manifestoContent.default.copy;
 
   // Ensure page background matches the default state immediately.
@@ -163,4 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setTimeout(typeWriter, 500);
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTypewriterIntro);
+} else {
+  initTypewriterIntro();
+}
