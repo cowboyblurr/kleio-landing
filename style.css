@@ -192,7 +192,6 @@ body.landing-page .waitlist-form {
     letter-spacing: 0.15em;
     font-family: 'Inter', sans-serif;
 }
-
 button.menu-item {
     display: flex;
     align-items: center;
@@ -288,7 +287,6 @@ body.landing-page .logo-wrapper.social-open .social-item:nth-child(2) {
 body.landing-page .logo-wrapper.social-open .social-item:nth-child(3) {
     animation-delay: 0.24s;
 }
-
 /* --- DESCRIPTION & FORM --- */
 p.description {
     font-size: 1rem;

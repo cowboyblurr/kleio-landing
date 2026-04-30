@@ -15,7 +15,7 @@ if (logoTrigger && logoWrapper) {
     });
 }
 
-if (socialTrigger && logoWrapper) {
+if (socialTrigger) {
     socialTrigger.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
