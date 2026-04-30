@@ -95,10 +95,10 @@ body.identity-page #identity-manifest-root .content-panel {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 6.5rem 5% 2rem;
+  padding: 3.6rem 4.5% 1rem;
   box-sizing: border-box;
 }
 
@@ -108,21 +108,21 @@ body.identity-page #identity-manifest-root .identity-header {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 4px;
-  min-height: 200px;
+  gap: 0;
+  min-height: 240px;
 }
 
 body.identity-page #identity-manifest-root .identity-logo {
   display: block;
   width: 100%;
-  max-width: 340px;
+  max-width: 420px;
   aspect-ratio: 34 / 10;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 body.identity-page #identity-manifest-root #dynamic-title {
   width: 100%;
-  margin: 0 0 14px;
+  margin: 0 0 8px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 300;
