@@ -597,7 +597,7 @@ body.typewriter-done #typewriter-text::after {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) translateX(calc(-230px - 50%)) translateY(calc(-175px + 30%));
+    transform: translate(-250px, -150px);
     pointer-events: none;
     z-index: 9;
 }
@@ -619,7 +619,7 @@ body.typewriter-done #typewriter-text::after {
 }
 
 #node-b.is-hovered .timeline-hover-overlay {
-    transform: translate(-50%, -50%) translateX(calc(-230px - 50%)) translateY(calc(-175px + 30%)) scale(1.035);
+    transform: translate(-250px, -150px) scale(1.035);
 }
 
 #node-b.is-hovered .timeline-hover-label {
