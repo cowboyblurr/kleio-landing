@@ -74,7 +74,7 @@ body.identity-page #identity-manifest-root .node-icon img {
 
 body.identity-page #identity-manifest-root #node-psychology { top: 20%; left: 24%; }
 body.identity-page #identity-manifest-root #node-gallery { top: 18%; left: 52%; }
-body.identity-page #identity-manifest-root #node-data { top: 46%; left: 69%; }
+body.identity-page #identity-manifest-root #node-data { top: 32%; left: 69%; }
 
 body.identity-page #identity-manifest-root .node-icon:hover img,
 body.identity-page #identity-manifest-root .locked-node img {
@@ -111,8 +111,7 @@ body.identity-page #identity-manifest-root .identity-header {
   justify-content: flex-start;
   gap: 6px;
   min-height: 0;
-  max-height: clamp(260px, 52vh, 380px);
-  overflow: hidden;
+  max-height: none;
 }
 
 body.identity-page #identity-manifest-root .identity-media-stack {
@@ -145,17 +144,17 @@ body.identity-page #identity-manifest-root .identity-logo-mark {
 }
 
 body.identity-page #identity-manifest-root .face-data {
-  transform: scale(1.2);
+  transform: scale(1.5);
   transform-origin: center center;
 }
 
 body.identity-page #identity-manifest-root #dynamic-title {
   width: 100%;
-  margin: 0 0 6px;
+  margin: 0 0 10px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 300;
-  font-size: clamp(1rem, 2.1vw, 1.7rem);
+  font-size: clamp(0.92rem, 1.7vw, 1.35rem);
   letter-spacing: clamp(1px, 0.25vw, 4px);
   overflow-wrap: anywhere;
 }
