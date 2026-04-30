@@ -57,13 +57,6 @@ body.identity-page #identity-manifest-root .identity-portrait {
   will-change: opacity, filter;
 }
 
-body.identity-page #identity-manifest-root .face-data {
-  transform: scale(1.65);
-  transform-origin: center center;
-  filter: none;
-  box-shadow: none;
-}
-
 body.identity-page #identity-manifest-root .node-icon {
   position: absolute;
   z-index: 20;
@@ -81,7 +74,7 @@ body.identity-page #identity-manifest-root .node-icon img {
 
 body.identity-page #identity-manifest-root #node-psychology { top: 20%; left: 24%; }
 body.identity-page #identity-manifest-root #node-gallery { top: 18%; left: 52%; }
-body.identity-page #identity-manifest-root #node-data { top: calc(46% - 15%); left: 78%; z-index: 25; }
+body.identity-page #identity-manifest-root #node-data { top: 46%; left: 69%; }
 
 body.identity-page #identity-manifest-root .node-icon:hover img,
 body.identity-page #identity-manifest-root .locked-node img {
@@ -102,10 +95,10 @@ body.identity-page #identity-manifest-root .content-panel {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding: 3.2rem 4.5% 0.8rem;
+  padding: 6.5rem 5% 2rem;
   box-sizing: border-box;
 }
 
@@ -114,45 +107,29 @@ body.identity-page #identity-manifest-root .identity-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 4px;
 }
 
 body.identity-page #identity-manifest-root .identity-logo {
   width: 100%;
-  max-width: 300px;
-  margin-bottom: 4px;
-}
-
-body.identity-page #identity-manifest-root .identity-logo-video {
-  display: block;
-  height: auto;
-  object-fit: contain;
-  max-width: 300px;
-}
-
-body.identity-page #identity-manifest-root .identity-logo-mark {
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  margin-bottom: 4px;
-  transform: translateY(-70%) scale(2);
-  transform-origin: center top;
+  max-width: 340px;
+  margin-bottom: 10px;
 }
 
 body.identity-page #identity-manifest-root #dynamic-title {
   width: 100%;
-  margin: 0 0 6px;
+  margin: 0 0 14px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 300;
-  font-size: clamp(0.96rem, 1.56vw, 1.26rem);
-  letter-spacing: clamp(0.6px, 0.18vw, 2px);
+  font-size: clamp(1rem, 2.1vw, 1.7rem);
+  letter-spacing: clamp(1px, 0.25vw, 4px);
   overflow-wrap: anywhere;
 }
 
 body.identity-page #identity-manifest-root .manifesto-vault {
   width: 100%;
-  max-width: 430px;
+  max-width: 500px;
 }
 
 body.identity-page #identity-manifest-root .state-desc {
@@ -163,8 +140,8 @@ body.identity-page #identity-manifest-root .state-desc {
 
 body.identity-page #identity-manifest-root .state-desc p {
   margin: 0;
-  font-size: clamp(0.864rem, 1.056vw, 0.984rem);
-  line-height: 1.32;
+  font-size: clamp(0.86rem, 1.2vw, 1rem);
+  line-height: 1.55;
   color: #444;
   overflow-wrap: anywhere;
 }
@@ -191,29 +168,4 @@ body.identity-page #identity-manifest-root.state-gallery .face-gallery {
 @keyframes fadein {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-height: 840px) {
-  body.identity-page #identity-manifest-root .content-panel {
-    padding-top: 2.4rem;
-    padding-bottom: 0.5rem;
-  }
-
-  body.identity-page #identity-manifest-root .identity-logo-video {
-    max-width: 250px;
-  }
-
-  body.identity-page #identity-manifest-root .identity-logo-mark {
-    max-width: 185px;
-  }
-
-  body.identity-page #identity-manifest-root #dynamic-title {
-    font-size: 0.936rem;
-    margin-bottom: 4px;
-  }
-
-  body.identity-page #identity-manifest-root .state-desc p {
-    font-size: 0.828rem;
-    line-height: 1.28;
-  }
 }
