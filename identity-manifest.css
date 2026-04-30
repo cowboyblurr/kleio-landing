@@ -40,9 +40,9 @@ body.identity-page #identity-manifest-root .portrait-viewport {
 body.identity-page #identity-manifest-root .portrait-stack {
   position: absolute;
   left: 6%;
-  bottom: 2rem;
+  bottom: 1rem;
   width: min(40vw, 430px);
-  height: min(calc(100vh - 8.5rem), 560px);
+  height: min(calc(100vh - 10rem), 520px);
   z-index: 10;
 }
 
@@ -98,8 +98,9 @@ body.identity-page #identity-manifest-root .content-panel {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 3.6rem 4.5% 1rem;
+  padding: 4.4rem 4.5% 1rem;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 body.identity-page #identity-manifest-root .identity-header {
@@ -108,21 +109,49 @@ body.identity-page #identity-manifest-root .identity-header {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 0;
-  min-height: 240px;
+  gap: 6px;
+  min-height: 0;
+  max-height: clamp(260px, 52vh, 380px);
+  overflow: hidden;
+}
+
+body.identity-page #identity-manifest-root .identity-media-stack {
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body.identity-page #identity-manifest-root .identity-logo {
   display: block;
   width: 100%;
-  max-width: 420px;
-  aspect-ratio: 34 / 10;
   margin-bottom: 6px;
+}
+
+body.identity-page #identity-manifest-root .identity-logo-video {
+  display: block;
+  width: 100%;
+  max-height: clamp(160px, 28vh, 230px);
+  height: auto;
+  object-fit: contain;
+}
+
+body.identity-page #identity-manifest-root .identity-logo-mark {
+  display: block;
+  width: 78%;
+  max-width: 320px;
+  height: auto;
+  margin: -28px auto 2px;
+}
+
+body.identity-page #identity-manifest-root .face-data {
+  transform: scale(1.2);
+  transform-origin: center center;
 }
 
 body.identity-page #identity-manifest-root #dynamic-title {
   width: 100%;
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 300;
@@ -133,7 +162,7 @@ body.identity-page #identity-manifest-root #dynamic-title {
 
 body.identity-page #identity-manifest-root .manifesto-vault {
   width: 100%;
-  max-width: 500px;
+  max-width: min(500px, 94%);
 }
 
 body.identity-page #identity-manifest-root .state-desc {
@@ -172,4 +201,10 @@ body.identity-page #identity-manifest-root.state-gallery .face-gallery {
 @keyframes fadein {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-height: 820px) {
+  body.identity-page #identity-manifest-root .portrait-stack {
+    height: min(calc(100vh - 9.5rem), 470px);
+  }
 }
