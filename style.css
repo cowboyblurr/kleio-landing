@@ -44,7 +44,7 @@ body.landing-page {
 }
 
 body.landing-page .container {
-    width: min(92vw, 900px);
+    width: min(96vw, 1200px);
     height: 100dvh;
     min-height: 100dvh;
     padding: 0.2rem 2rem 0.6rem;
@@ -55,13 +55,16 @@ body.landing-page .container {
 
 body.landing-page .video-wrapper {
     width: 100%;
-    max-width: 560px;
+    max-width: 1120px;
     margin-top: 0;
-    margin-bottom: -6.75rem;
+    margin-bottom: -14.75rem;
     transform: translateY(20%);
+    padding-bottom: 8rem;
+    overflow: hidden;
 }
 
 body.landing-page .hero-video {
+    width: 560px;
     transform: scale(2);
     transform-origin: center center;
 }
