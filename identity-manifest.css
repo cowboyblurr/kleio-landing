@@ -14,6 +14,7 @@ body.identity-page .back-link {
   font-weight: 600;
   letter-spacing: 2px;
   z-index: 100;
+  animation: fadein 1.5s ease-in-out forwards;
 }
 
 body.identity-page #identity-manifest-root.identity-container {
@@ -22,6 +23,7 @@ body.identity-page #identity-manifest-root.identity-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
+  animation: fadein 1.5s ease-in-out forwards;
 }
 
 body.identity-page #identity-manifest-root .portrait-viewport {
@@ -161,4 +163,9 @@ body.identity-page #identity-manifest-root.state-data .desc-data {
 
 body.identity-page #identity-manifest-root.state-gallery .face-gallery {
   filter: url(#wave-shuffler);
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

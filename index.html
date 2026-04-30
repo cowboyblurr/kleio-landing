@@ -25,7 +25,7 @@
 <div class="container">
     
     <div class="video-wrapper">
-        <video autoplay loop muted playsinline class="hero-video">
+        <video autoplay loop muted playsinline preload="metadata" class="hero-video">
             <source src="https://github.com/cowboyblurr/KLEIO-ASSETS/raw/refs/heads/main/Transparent%20webpagebackground.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -43,10 +43,24 @@
         <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/KLEIO%20LOGO%20WITHOUT%20TEst.png?raw=true" alt="Kleio Logo" class="kleio-logo" id="logo-trigger">
         
         <div class="wing-node right">
-            <a href="#" target="_blank" class="menu-item">
+            <button type="button" class="menu-item social-trigger" id="social-trigger" aria-expanded="false">
                 <span>Social Media</span>
                 <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon">
-            </a>
+            </button>
+            <div class="social-branch" id="social-branch">
+                <a href="https://www.linkedin.com/company/115873672/" target="_blank" rel="noopener noreferrer" class="social-item">
+                    <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon" alt="">
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://www.instagram.com/kleio.arthouse/" target="_blank" rel="noopener noreferrer" class="social-item">
+                    <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon" alt="">
+                    <span>Instagram</span>
+                </a>
+                <a href="https://pin.it/6b4NvB82d" target="_blank" rel="noopener noreferrer" class="social-item">
+                    <img src="https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/ezgif-79884294fd0120c1.gif?raw=true" class="menu-icon" alt="">
+                    <span>Pinterest</span>
+                </a>
+            </div>
         </div>
 
     </div>

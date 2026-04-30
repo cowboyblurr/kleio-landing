@@ -43,6 +43,42 @@ const fingerHotspots = {
 let hoveredFingerId = null;
 let typingRunId = 0;
 
+function syncFingerReveal() {
+  if (!page) {
+    return;
+  }
+
+  const baseFingerImages = Array.from(
+    document.querySelectorAll('.finger-node img:not(.finger-hover-gif)')
+  );
+
+  if (baseFingerImages.length === 0) {
+    page.classList.add('manifesto-fingers-ready');
+    return;
+  }
+
+  page.classList.add('manifesto-fingers-loading');
+
+  const imagePromises = baseFingerImages.map((img) => new Promise((resolve) => {
+    if (img.complete) {
+      resolve();
+      return;
+    }
+
+    const finish = () => resolve();
+    img.addEventListener('load', finish, { once: true });
+    img.addEventListener('error', finish, { once: true });
+  }));
+
+  Promise.race([
+    Promise.all(imagePromises),
+    new Promise((resolve) => setTimeout(resolve, 2500))
+  ]).then(() => {
+    page.classList.remove('manifesto-fingers-loading');
+    page.classList.add('manifesto-fingers-ready');
+  });
+}
+
 function applyManifestoState(stateKey, options = { updateCopy: true }) {
   const state = manifestoContent[stateKey] || manifestoContent.default;
 
@@ -128,7 +164,9 @@ if (composition) {
 }
 
 if (resetTrigger) {
-  resetTrigger.addEventListener('click', () => {
+  resetTrigger.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     window.location.href = './index.html';
   });
 }
@@ -166,7 +204,11 @@ function initTypewriterIntro() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initTypewriterIntro);
+  document.addEventListener('DOMContentLoaded', () => {
+    syncFingerReveal();
+    initTypewriterIntro();
+  });
 } else {
+  syncFingerReveal();
   initTypewriterIntro();
 }
