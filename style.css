@@ -549,7 +549,7 @@ body.typewriter-done #typewriter-text::after {
     top: 50%;
     left: 50%;
     /* Positioning for the label/line so it stays inside the viewport */
-    transform: translate(-50%, -50%) translateX(-140%) translateY(-230px);
+    transform: translate(-50%, -50%) translateX(-110%) translateY(-230px);
     pointer-events: none;
     z-index: 9;
     --mf-line-angle: -18deg;
@@ -578,7 +578,7 @@ body.typewriter-done #typewriter-text::after {
 }
 
 #node-a.is-hovered .manifesto-hover-overlay {
-    transform: translate(-50%, -50%) translateX(-140%) translateY(-230px) scale(1.035);
+    transform: translate(-50%, -50%) translateX(-110%) translateY(-230px) scale(1.035);
 }
 
 #node-a.is-hovered .manifesto-hover-line {
