@@ -29,19 +29,49 @@ A frictionless singularity between the physical masterpiece and the digital vaul
 const copyDisplay = document.getElementById('typewriter-text');
 const page = document.body;
 const resetTrigger = document.getElementById('logo-trigger-reset');
+const artistsNode = document.getElementById('node-1');
 const fingerNodes = document.querySelectorAll('.finger-node');
 const composition = document.querySelector('.manifesto-composition');
+const artistsDestination = 'http://localhost:4174/for-artists.html#philosophy';
 
 const fingerHotspots = {
-  'node-1': { x: 0.2, y: 0.58, radius: 0.13 },
-  'node-b': { x: 0.34, y: 0.35, radius: 0.13 },
-  'node-a': { x: 0.48, y: 0.18, radius: 0.14 },
-  'node-c': { x: 0.62, y: 0.27, radius: 0.14 },
-  'node-d': { x: 0.81, y: 0.6, radius: 0.16 }
+  'node-1': { x: 0.2, y: 0.58, radius: 0.15 },
+  'node-b': { x: 0.33, y: 0.35, radius: 0.12 },
+  'node-a': { x: 0.49, y: 0.2, radius: 0.125 },
+  'node-c': { x: 0.66, y: 0.29, radius: 0.125 },
+  'node-d': { x: 0.79, y: 0.62, radius: 0.14 }
 };
 
 let hoveredFingerId = null;
 let typingRunId = 0;
+let isNavigating = false;
+
+function navigateToArtistsPage() {
+  if (isNavigating) {
+    return;
+  }
+
+  isNavigating = true;
+
+  const transitionMask = document.createElement('div');
+  transitionMask.setAttribute('aria-hidden', 'true');
+  transitionMask.style.position = 'fixed';
+  transitionMask.style.inset = '0';
+  transitionMask.style.background = '#ffffff';
+  transitionMask.style.opacity = '0';
+  transitionMask.style.pointerEvents = 'none';
+  transitionMask.style.zIndex = '9999';
+  transitionMask.style.transition = 'opacity 180ms ease';
+  document.body.appendChild(transitionMask);
+
+  requestAnimationFrame(() => {
+    transitionMask.style.opacity = '1';
+  });
+
+  window.setTimeout(() => {
+    window.location.href = artistsDestination;
+  }, 170);
+}
 
 function syncFingerReveal() {
   if (!page) {
@@ -134,6 +164,20 @@ function getNearestFinger(pointerX, pointerY) {
     }
   });
 
+  // Fallback: if no finger was hit directly, allow nearest within a soft global threshold.
+  if (!nearestFingerId) {
+    const fallbackMaxDistance = 0.18;
+
+    Object.entries(fingerHotspots).forEach(([nodeId, hotspot]) => {
+      const distance = Math.hypot(normalizedX - hotspot.x, normalizedY - hotspot.y);
+
+      if (distance <= fallbackMaxDistance && distance < nearestDistance) {
+        nearestFingerId = nodeId;
+        nearestDistance = distance;
+      }
+    });
+  }
+
   return nearestFingerId;
 }
 
@@ -153,6 +197,11 @@ if (composition) {
       return;
     }
 
+    if (nearestFingerId === 'node-1') {
+      navigateToArtistsPage();
+      return;
+    }
+
     const node = document.getElementById(nearestFingerId);
 
     if (!node || !node.classList.contains('signature-node')) {
@@ -168,6 +217,14 @@ if (resetTrigger) {
     event.preventDefault();
     event.stopPropagation();
     window.location.href = './index.html';
+  });
+}
+
+if (artistsNode) {
+  artistsNode.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    navigateToArtistsPage();
   });
 }
 

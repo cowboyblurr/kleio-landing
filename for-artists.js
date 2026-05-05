@@ -2,6 +2,25 @@ const revealNodes = Array.from(document.querySelectorAll(".reveal"));
 const dynamicPanels = Array.from(document.querySelectorAll("[data-random-image='true']"));
 const imageCards = Array.from(document.querySelectorAll(".image-card"));
 
+window.addEventListener("DOMContentLoaded", () => {
+  const markReady = () => {
+    document.body.classList.remove("artists-preload");
+    document.body.classList.add("artists-ready");
+  };
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(markReady);
+      });
+    });
+  } else {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(markReady);
+    });
+  }
+});
+
 const galleryPool = [
   "https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/0193643f4d852513631e5aa2df664642.jpg?raw=true",
   "https://github.com/cowboyblurr/KLEIO-ASSETS/blob/main/3ef8156f444ddcc8b5ec301bb3fa7c77.jpg?raw=true",

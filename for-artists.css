@@ -20,6 +20,36 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+body.artists-preload::before,
+body.artists-ready::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+}
+
+body.artists-preload::before {
+  opacity: 1;
+}
+
+body.artists-ready::before {
+  opacity: 0;
+}
+
+body.artists-preload .board {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+body.artists-ready .board {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
 .board-wrap {
   min-height: 100vh;
   padding: 1.1rem;
@@ -28,8 +58,8 @@ body {
 .board {
   max-width: 1180px;
   margin: 0 auto;
-  background: var(--panel);
-  border: 1px solid #a8a8a8;
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 28px;
   overflow: hidden;
 }

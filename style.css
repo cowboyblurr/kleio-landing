@@ -47,28 +47,38 @@ body.landing-page .container {
     width: min(96vw, 1200px);
     height: 100dvh;
     min-height: 100dvh;
-    padding: 0.2rem 2rem 0.6rem;
+    padding: 1.2rem 2rem 0.7rem;
     box-sizing: border-box;
-    gap: 0.2rem;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    align-content: start;
+    justify-items: center;
+    gap: 0.22rem;
     overflow: hidden;
 }
 
 body.landing-page .video-wrapper {
     width: 100%;
-    max-width: 1120px;
-    margin-top: 0;
-    margin-bottom: -14.75rem;
-    transform: translateY(20%);
-    padding-bottom: 8rem;
-    overflow: hidden;
+    max-width: 920px;
+    margin-top: 0.2rem;
+    margin-bottom: 0;
+    transform: none;
+    padding-bottom: 0;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease;
 }
 
 body.landing-page .hero-video {
-    width: 560px;
-    transform: scale(2);
+    width: min(460px, 44vw);
+    max-width: 100%;
+    max-height: 34dvh;
+    transform: translateY(30%) scale(2.6);
+    object-fit: contain;
     transform-origin: center center;
 }
 
@@ -78,26 +88,101 @@ body.landing-page.video-ready .video-wrapper {
 }
 
 body.landing-page .logo-wrapper {
-    margin-top: -6rem;
-    transform: translateY(-290%);
+    margin-top: 0.1rem;
+    transform: none;
 }
 
 body.landing-page p.description,
 body.landing-page .waitlist-form {
-    transform: translateY(-610%);
+    transform: none;
+    position: relative;
+    z-index: 25;
 }
 
 body.landing-page .kleio-logo {
-    max-width: 245px;
+    max-width: 210px;
 }
 
 body.landing-page p.description {
-    margin: 0.2rem 0 0.6rem;
-    line-height: 1.55;
+    max-width: min(760px, 92vw);
+    margin: 0.1rem 0 0.28rem;
+    line-height: 1.24;
+    font-size: clamp(1.2rem, 1.5vw, 1.38rem);
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    color: var(--obsidian);
 }
 
 body.landing-page .waitlist-form {
-    gap: 0.6rem;
+    gap: 0.3rem;
+}
+
+body.landing-page input[type="email"],
+body.landing-page button[type="submit"] {
+    width: min(320px, 74vw);
+    padding: 0.72rem;
+    font-size: 0.72rem;
+}
+
+@media (max-height: 860px) {
+    body.landing-page .container {
+        padding-top: 0.9rem;
+        gap: 0.2rem;
+    }
+
+    body.landing-page .video-wrapper {
+        margin-bottom: 0;
+    }
+
+    body.landing-page .hero-video {
+        width: min(410px, 40vw);
+        max-height: 30dvh;
+        transform: translateY(30%) scale(2.6);
+    }
+
+    body.landing-page .kleio-logo {
+        max-width: 190px;
+    }
+
+    body.landing-page p.description {
+        font-size: clamp(1.08rem, 1.35vw, 1.26rem);
+        line-height: 1.18;
+        margin-bottom: 0.2rem;
+    }
+}
+
+@media (max-height: 760px) {
+    body.landing-page .container {
+        padding-top: 0.7rem;
+        padding-bottom: 0.35rem;
+        gap: 0.12rem;
+    }
+
+    body.landing-page .video-wrapper {
+        margin-bottom: 0;
+    }
+
+    body.landing-page .hero-video {
+        width: min(330px, 34vw);
+        max-height: 24dvh;
+        transform: translateY(30%) scale(2.6);
+    }
+
+    body.landing-page .kleio-logo {
+        max-width: 168px;
+    }
+
+    body.landing-page p.description {
+        font-size: clamp(0.99rem, 1.24vw, 1.14rem);
+        line-height: 1.12;
+    }
+
+    body.landing-page input[type="email"],
+    body.landing-page button[type="submit"] {
+        padding: 0.56rem;
+        font-size: 0.64rem;
+    }
 }
 
 /* Cinematic Video Centralization */
@@ -543,13 +628,47 @@ body.typewriter-done #typewriter-text::after {
     filter: brightness(1.06) saturate(1.08);
 }
 
+/* Finger 1 (node-1) hover-only ARTISTS label */
+#node-1 .artists-hover-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateX(-388%) translateY(-18px);
+    pointer-events: none;
+    z-index: 9;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+
+#node-1 .artists-hover-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.25s ease 0s;
+    pointer-events: none;
+}
+
+#node-1.is-hovered .artists-hover-overlay {
+    opacity: 1;
+}
+
+#node-1.is-hovered .artists-hover-label {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* Finger A (node-a) hover-only manifesto overlay */
 #node-a .manifesto-hover-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     /* Positioning for the label/line so it stays inside the viewport */
-    transform: translate(-50%, -50%) translateX(-110%) translateY(-230px);
+    transform: translate(-50%, -50%) translateX(-77%) translateY(-230px);
     pointer-events: none;
     z-index: 9;
     --mf-line-angle: -18deg;
@@ -578,7 +697,7 @@ body.typewriter-done #typewriter-text::after {
 }
 
 #node-a.is-hovered .manifesto-hover-overlay {
-    transform: translate(-50%, -50%) translateX(-110%) translateY(-230px) scale(1.035);
+    transform: translate(-50%, -50%) translateX(-77%) translateY(-230px) scale(1.035);
 }
 
 #node-a.is-hovered .manifesto-hover-line {
@@ -910,6 +1029,16 @@ body.identity-page {
 #node-a a {
     pointer-events: auto;
     display: block;
+}
+
+#node-1 {
+    pointer-events: auto;
+    z-index: 12;
+    cursor: pointer;
+}
+
+#node-1 img {
+    pointer-events: auto;
 }
 
 #node-a {
