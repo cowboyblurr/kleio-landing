@@ -32,7 +32,7 @@ const resetTrigger = document.getElementById('logo-trigger-reset');
 const artistsNode = document.getElementById('node-1');
 const fingerNodes = document.querySelectorAll('.finger-node');
 const composition = document.querySelector('.manifesto-composition');
-const artistsDestination = 'http://localhost:4174/for-artists.html#philosophy';
+const artistsDestination = './for-artists.html#philosophy';
 
 const fingerHotspots = {
   'node-1': { x: 0.2, y: 0.58, radius: 0.15 },
