@@ -29,10 +29,11 @@ A frictionless singularity between the physical masterpiece and the digital vaul
 const copyDisplay = document.getElementById('typewriter-text');
 const page = document.body;
 const resetTrigger = document.getElementById('logo-trigger-reset');
-const artistsNode = document.getElementById('node-1');
 const fingerNodes = document.querySelectorAll('.finger-node');
 const composition = document.querySelector('.manifesto-composition');
 const artistsDestination = './for-artists.html#philosophy';
+const manifestoDestination = './identity-manifest.html';
+const moodboardDestination = './moodboard.html';
 
 const fingerHotspots = {
   'node-1': { x: 0.2, y: 0.58, radius: 0.15 },
@@ -46,7 +47,7 @@ let hoveredFingerId = null;
 let typingRunId = 0;
 let isNavigating = false;
 
-function navigateToArtistsPage() {
+function navigateWithOverlay(destination, color, durationMs) {
   if (isNavigating) {
     return;
   }
@@ -57,11 +58,11 @@ function navigateToArtistsPage() {
   transitionMask.setAttribute('aria-hidden', 'true');
   transitionMask.style.position = 'fixed';
   transitionMask.style.inset = '0';
-  transitionMask.style.background = '#ffffff';
+  transitionMask.style.background = color;
   transitionMask.style.opacity = '0';
   transitionMask.style.pointerEvents = 'none';
   transitionMask.style.zIndex = '9999';
-  transitionMask.style.transition = 'opacity 180ms ease';
+  transitionMask.style.transition = `opacity ${durationMs}ms ease`;
   document.body.appendChild(transitionMask);
 
   requestAnimationFrame(() => {
@@ -69,8 +70,20 @@ function navigateToArtistsPage() {
   });
 
   window.setTimeout(() => {
-    window.location.href = artistsDestination;
-  }, 170);
+    window.location.href = destination;
+  }, durationMs);
+}
+
+function navigateToArtistsPage() {
+  navigateWithOverlay(artistsDestination, '#ffffff', 180);
+}
+
+function navigateToMoodboardPage() {
+  navigateWithOverlay(moodboardDestination, '#000000', 300);
+}
+
+function navigateToManifestoPage() {
+  navigateWithOverlay(manifestoDestination, '#ffffff', 180);
 }
 
 function syncFingerReveal() {
@@ -191,40 +204,47 @@ if (composition) {
   });
 
   composition.addEventListener('click', (event) => {
-    const nearestFingerId = getNearestFinger(event.clientX, event.clientY);
+    event.preventDefault();
 
-    if (!nearestFingerId) {
-      return;
-    }
+    const nearestFingerId = getNearestFinger(event.clientX, event.clientY);
 
     if (nearestFingerId === 'node-1') {
       navigateToArtistsPage();
       return;
     }
 
-    const node = document.getElementById(nearestFingerId);
-
-    if (!node || !node.classList.contains('signature-node')) {
+    if (nearestFingerId === 'node-a') {
+      navigateToManifestoPage();
       return;
     }
 
-    applyManifestoNode(node);
-  });
-}
+    if (nearestFingerId === 'node-c') {
+      navigateToMoodboardPage();
+      return;
+    }
 
-if (resetTrigger) {
-  resetTrigger.addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    window.location.href = './index.html';
-  });
-}
+    if (nearestFingerId) {
+      const node = document.getElementById(nearestFingerId);
 
-if (artistsNode) {
-  artistsNode.addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    navigateToArtistsPage();
+      if (node && node.classList.contains('signature-node')) {
+        applyManifestoNode(node);
+      }
+
+      return;
+    }
+
+    if (resetTrigger) {
+      const logoRect = resetTrigger.getBoundingClientRect();
+
+      if (
+        event.clientX >= logoRect.left &&
+        event.clientX <= logoRect.right &&
+        event.clientY >= logoRect.top &&
+        event.clientY <= logoRect.bottom
+      ) {
+        window.location.href = './index.html';
+      }
+    }
   });
 }
 

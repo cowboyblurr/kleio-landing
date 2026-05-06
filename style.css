@@ -461,6 +461,7 @@ body.manifesto-page {
 
 /* Learn-more viewport lock + composition sizing */
 body.manifesto-page .container {
+    position: relative;
     height: 100%;
     width: 100%;
     max-width: none;
@@ -481,6 +482,8 @@ body.manifesto-page .manifesto-composition {
     margin: 0;
     max-width: none;
     z-index: 5;
+    pointer-events: auto;
+    cursor: default;
 }
 
 body.manifesto-page.manifesto-fingers-loading .finger-node {
@@ -499,6 +502,7 @@ body.manifesto-page.manifesto-fingers-ready .finger-node {
     left: 8%;
     width: 35%;
     min-width: 300px;
+    pointer-events: none;
     max-width: 450px;
     text-align: left;
     font-size: 1rem;
@@ -570,6 +574,7 @@ body.typewriter-done #typewriter-text::after {
     transform: translate(-50%, -50%);
     z-index: 10;
     cursor: pointer;
+    pointer-events: none;
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -1027,22 +1032,47 @@ body.identity-page {
 }
 
 #node-a a {
-    pointer-events: auto;
+    pointer-events: none;
     display: block;
 }
 
+#node-1 .artists-node-link {
+    pointer-events: none;
+    display: block;
+    text-decoration: none;
+}
+
+#node-c .moodboard-node-link {
+    pointer-events: none;
+    display: block;
+    text-decoration: none;
+}
+
 #node-1 {
-    pointer-events: auto;
-    z-index: 12;
+    pointer-events: none;
     cursor: pointer;
 }
 
 #node-1 img {
-    pointer-events: auto;
+    pointer-events: none;
 }
 
 #node-a {
-    pointer-events: auto;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+#node-a img {
+    pointer-events: none;
+}
+
+#node-c {
+    pointer-events: none;
+    cursor: pointer;
+}
+
+#node-c img {
+    pointer-events: none;
 }
 
 /* --- CORE STYLES --- */
